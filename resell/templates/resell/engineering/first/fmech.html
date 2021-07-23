@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="my-5">
+<h4 class="text-center my-2">Mechanical Engineering Books/Module</h4>
+  {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+    {% endfor %}
+
+{% else %}
+<div class="row">
+<div class="col-lg-4">
+</div>
+<div class="col-lg-4"></div>
+<div class="col-lg-4">
+<form action="{% url 'search' %}?q=first&g=fmech" method="post" class="my-3 ml-3 search_form"> {% csrf_token %}
+            <input type="text"  placeholder="Book by name,author,isbn" style="width:70%;" name="bs" required>
+            <button class="btn btn-primary" style="font: caption;" name="book_search" type="submit"><i class="fa fa-search"></i></button>
+        </form> 
+</div>
+</div>
+{% endif %}
+<div class="row">
+{% for book in books %}
+ <div class="col-lg-4 col-md-6  d-flex justify-content-center">
+      <div class="card mr-2 ml-2 my-3 bg-light page_pr" >
+                <h2 class="mb-0">
+                   <span 
+                    class="badge badge-info badge-sm text-white">&#8377;{{book.offeredprice}} ({{book.offered |lower}})</span>
+                    <kbd class="badge badge-secondary badge-sm" style="font-size: 15px;"><del>&#8377;{{book.actualprice}}</del></kbd>
+                </h2> 
+            <div class="card-body">
+            <h5 class="card-title" style="font-weight:bold;overflow-wrap: anywhere; font-size:19px;color: white;background: black;padding: 0.25rem 0.5rem;border-radius: 4px;">{{book.book_name | title}}</h5>
+             
+            <p class="" style="font-weight:1000;overflow-wrap: anywhere;"><i class="fas fa-pencil-alt"></i> {{book.author | title}}</p>
+                  <p class="" style="font-weight:1000;overflow-wrap: anywhere;"> Pub : {{book.publisher | title}}</p>
+                  <p class="" style="font-weight:1000;overflow-wrap: anywhere;"><i class="fa fa-map-marker fa-lg"></i> {{book.resellercity | title}}</p>
+                <a href="{% url 'resell_details' book.reseller_name book.bookname %}?m=first&p=fmech" class="btn btn-primary">Full Details</a>
+                {% ifequal request.user book.acc_holder %}
+                <a href="{% url 'delete_page1' book.reseller_name book.bookname %}" class="btn btn-danger  delete_ad">Delete</a>
+                {% endifequal %}
+                 <br>
+                 <span class="badge badge-secondary" style="font-size:12px">Posted {{book.pub_date | timesince }} ago</span>
+            </div> 
+             <div class="card-footer text-muted " >
+                <a href="https://wa.me/+91{{book.reseller_whatsapp}}" 
+                class="whatsapp_style"  target="_blank">
+                                <i class="fa fa-whatsapp fa-2x"></i>
+                </a>
+             
+                <a class="phone_style"  href="tel:+91 {{book.reseller_contact}}">
+                <i class="fa fa-phone fa-2x" style="cursor: pointer;"></i>
+                </a>
+                
+            </div>
+       </div> 
+
+
+      </div>
+{% endfor %}
+</div>
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+  {% if books.has_previous %}
+    <li class="page-item ">
+      <a class="page-link" href="?q=first&g=fmech&page={{books.previous_page_number}}" tabindex="-1" aria-disabled="true">Previous</a>
+    </li>
+    {% endif %}
+   
+    <li class="page-item"><a class="page-link" href="#"> {{ books.number }} of {{ books.paginator.num_pages }}</a></li>
+     {% if books.has_next %}
+      <li class="page-item ">
+      <a class="page-link" href="?q=first&g=fmech&page={{ books.next_page_number }}" tabindex="-1" aria-disabled="true">Next</a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>  
+ <div class="text-center mt-5">
+<a href="{% url 'buy_book' %}" id="stepper" class="previous round"><<</a>
+</div>
+</section>
+{% endblock content %}

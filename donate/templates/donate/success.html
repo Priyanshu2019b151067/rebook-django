@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="my-5"></section>
+ {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %} 
+
+{% endblock content %}

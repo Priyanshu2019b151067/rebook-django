@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<h1>Login</h1>
+<section class="my-5">
+  <div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+         <h2>Register </h2>
+        <div class="card">
+        <div class="card-body text-center">
+        
+      
+
+<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+  {% csrf_token %}
+{{ form.as_p }}
+
+
+
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <button type="submit" class="btn btn-danger">Signup</button>
+</form>
+  <p class="mt-2">Already have an account? Then please <a href="{{ login_url }}">Sign in</a>.</p>
+</div>
+</div>
+        </div>
+        <div class="col-lg-6">
+        <img src="{% static 'img/register.png' %}" alt="LoginPage" class="login_img my-3">
+        </div>
+    </div>
+  </div>
+
+
+
+
+
+</section>
+
+
+{% endblock %} 

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="my-5">
+<form action="" method="post">{% csrf_token %}
+
+ <h2>Are you sure, you wanna delete the post.</h2>
+ <hr>
+    <input type="submit" value="Yes" name="delete1" class="btn btn-danger">
+    <input type="submit" value="No" name="delete2" class="btn btn-success">
+
+   
+</form>
+</section>
+{% endblock content %}

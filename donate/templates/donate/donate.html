@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="my-5">
+
+<button type="button" class="btn btn-primary my-3"> <a href="{% url 'create_ngo' %}" style="color:white;">Add Ngo</a> </button>
+<button type="button" class="btn btn-primary float-right my-3"> <a href="{% url 'listdonation' %}" style="color:white;">Donate to individuals</a> </button>
+<div class="alert alert-primary my-3" role="alert">
+  Encourage Ngo's in your Contact to register🎗.
+</div>
+<h2 class="text-center ">Donate To Ngo's</h2>
+{% for ngo in ngos.all %}
+<div class="card text-center my-5">
+  <div class="card-header">
+    
+    <span class="text-right"><a href="{{ngo.ngo_website}}">{{ngo.ngo_website}}</a></span>
+  </div>
+  <div class="card-body">
+    <h2 class="card-title">{{ngo.ngo_name}}</h2>
+    <p class="card-text">{{ngo.ngo_aim}}</p>
+    <strong><p class="card-text my-2">Location : {{ngo.ngolocation}}</p></strong>
+    <strong><p class="card-text my-2">State : {{ngo.ngostate}}</p></strong>
+    {% if ngo.is_verified %}
+    {% else %}
+     <strong><p class="card-text my-2" style="color:red;">Ngo not verified</p></strong>
+    {% endif %}
+    {% if ngo.associated %}
+    <strong><p class="card-text my-2">Associated Org. : {{ngo.associated}}</p></strong>
+    {% endif %}
+    <a href="{% url 'bookdonater' ngo.ngo_name %}" class="btn btn-primary">Donate To {{ngo.ngo_name}}</a>
+  </div>
+  <div class="card-footer text-muted">
+  <a href="tel:+91{{ngo.phone_num}}"><i class="fa fa-phone" aria-hidden="true"> </i> {{ngo.phone_num}}</a>
+  &nbsp;&nbsp;
+    <a href="https://wa.me/+91{{ngo.ngo_whatsapp}}" class="whatsapp_float" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i> {{ngo.ngo_whatsapp}}</a>
+  </div>
+</div> 
+{% endfor %}
+
+</section>
+
+{% endblock content %}

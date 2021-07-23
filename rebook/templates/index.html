@@ -1,0 +1,227 @@
+{% extends 'base.html' %}
+{% load static %}
+  <!-- ======= Hero Section ======= -->
+  {% block content %}
+
+  
+    <!-- ======= Counts Section ======= -->
+    <section  id="hero1" class="d-flex justify-content-center align-items-center">
+    <div class="container">
+          <div class="row text-center">
+
+              <div class="col-6">
+             <a href="{% url 'buy_book' %}"> <button class="btn btn-info buy_sell" ><i class="fas fa-rupee-sign fa-x"></i>&nbsp;Buy Book</button></a>
+              </div>
+              <div class="col-6">
+              <a href="{% url 'enlist_book' %}">
+               <button class="btn btn-info buy_sell"><i class="fa fa-shopping-cart fa-x"></i>&nbsp;Sell Book</button></a>
+              </div>
+                {% comment %} <div class="col-3">
+                
+              <a class="info-box " href="{% url 'enlist_book' %}"><i class="fas fa-rupee-sign fa-2x"></i> <br> Sell</a>
+              </div>
+                <div class="col-3">  
+              <a class="info-box " href="{% url  %}"><i class="fa fa-shopping-cart fa-2x"></i> <br> Buy</a>
+              </div>
+                <div class="col-3">  
+                 <a class="info-box " href="{% url 'donate' %}"><i class="fa fa-heart fa-2x"></i> <br> Donate</a>
+                 </div>
+                <div class="col-3">  
+                 <a class="info-box " href="{% url 'available_books' %}"><i class="fas fa-dove fa-2x"></i> <br> Free </a>
+              </div> {% endcomment %}
+          </div>
+
+    </div>
+    
+    </section>
+
+    <section id="hero" class="d-flex justify-content-center align-items-center mb-5">
+    <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
+      <h1>Enlist Book for Resell.</h1>
+      <h3 id="rebook_text">Rebook provides a platform where you can enlist your book <br> for reselling, buy second-hand listed-books and donate one. </h3>
+    </div>
+  </section>
+
+<div class="section-title">
+          <h2>Recently Added</h2>
+          <p>For Resell</p>
+        </div>
+  <section class="recent posts">
+  <div class="owl-carousel owl-theme">
+      {% for book in books.all  %}
+      <div class="item  d-flex justify-content-center">
+  
+        <div class="card text-white card-has-bg click-col" style="width: 18rem;background-image:url({{book.book_photo.url}});">
+          
+            <div class="card-img-overlay d-flex flex-column">
+                <h2 >
+                    <span class="badge badge-secondary badge-sm text-white" style="font-size: 60%;">&#8377;{{book.offeredprice}} ({{book.offered |lower}})</span>
+                    <kbd class="badge badge-secondary badge-sm" style="font-size: 15px;"><del>&#8377;{{book.actualprice}}</del></kbd>
+                </h2> 
+                      <div class="card-body">
+                          <h5 class="card-title" style="font-weight:bold;overflow-wrap: anywhere; font-size:19px;color: white;background: black;padding: 0.25rem 0.5rem;border-radius: 4px;">{{book.book_name | title}}</h5>
+                          
+                          <p class="" style="font-weight:1000;overflow-wrap: anywhere;"><i class="fas fa-pencil-alt"></i> &nbsp; {{book.author | title}}</p>
+                              <p class="" style="font-weight:1000;overflow-wrap: anywhere;">Pub : {{book.publisher | title}}</p>
+                              <p class="" style="font-weight:1000;overflow-wrap: anywhere;"><i class="fa fa-map-marker fa-lg"></i>  &nbsp; {{book.resellercity | title}}</p>
+                          <a href="{% url 'resell_details' book.reseller_name book.bookname %}?q=home" class="btn btn-primary">Full Details</a>
+                        {% ifequal request.user book.acc_holder %}
+                        <a href="{% url 'delete_page1' book.reseller_name book.bookname %}" class="btn btn-danger  delete_ad">Delete</a>
+                        {% endifequal %}
+            <br>
+                        <span class="badge badge-secondary" style="font-size:12px">Posted {{book.pub_date | timesince }} ago</span>
+                      </div> 
+            <div class="card-footer" >
+              <a href="https://wa.me/+91{{book.reseller_whatsapp}}" 
+                          class="whatsapp_style text-white"  target="_blank">
+                                        <i class="fa fa-whatsapp fa-2x"></i>
+                          </a>
+                    
+                          <a class="phone_style text-white"  href="tel:+91 {{book.reseller_contact}}">
+                          <i class="fa fa-phone fa-2x" style="cursor: pointer;"></i>
+                          </a>
+                        
+                      </div>
+            </div>
+        </div>
+      </div>
+            
+      {% endfor %}
+
+
+  </div> 
+  </section>
+
+
+
+
+
+
+
+
+{% if indi %}
+<div class="section-title">
+          <h2>Recently Added</h2>
+          <p>Free Books</p>
+        </div>
+  <section class="recent posts">
+  <div class="owl-carousel owl-theme">
+      {% for book in indi.all  %}
+      <div class="item  d-flex justify-content-center">
+           <div class="card mr-2 ml-2 my-3 bg-light page_pr" >
+                        <h3 class="mb-0">
+                    <span  class="badge badge-info text-white ">Free<span> 
+                    </h3> 
+            <div class="card-body">
+                <h5 class="card-title" style="font-weight:bold;overflow-wrap: anywhere; font-size:19px;color: white;background: black;padding: 0.25rem 0.5rem;border-radius: 4px;">{{book.bookname | title}}</h5>
+                  <p class="" style="font-weight:1000;overflow-wrap: anywhere;"><i class="fas fa-pencil-alt"></i> {{book.author | title}}</p>
+                  <p class="" style="font-weight:1000;overflow-wrap: anywhere;"> Pub : {{book.publisher_detail | title}}</p>
+                  <p class="" style="font-weight:1000;overflow-wrap: anywhere;"><i class="fa fa-map-marker fa-lg"></i> {{book.donar_city | title}}</p>
+                <a href="{% url 'donate_details' book.donarname book.bookname %}?q=home" class="btn btn-primary">Full Details</a>
+                {% ifequal request.user book.acc_holder %}
+                <a href="{% url 'delete_page' book.donarname book.bookname %}" class="btn btn-danger  delete_ad">Delete</a>
+                {% endifequal %}
+                 <br>
+                 <span class="badge badge-secondary" style="font-size:12px">Posted {{book.pub_date | timesince }} ago</span>
+            </div> 
+             <div class="card-footer text-muted " >
+                <a href="https://wa.me/+91{{book.donarwhatsapp}}" 
+                class="whatsapp_style"  target="_blank">
+                                <i class="fa fa-whatsapp fa-2x"></i>
+                </a>
+             
+                <a class="phone_style"  href="tel:+91 {{book.donarphone}}">
+                <i class="fa fa-phone fa-2x" style="cursor: pointer;"></i>
+                </a>
+                
+            </div>
+       </div> 
+       </div> 
+      {% endfor %}
+  </div>
+  </section>
+
+{% endif %}
+
+
+
+
+
+
+
+
+<div class="section-title">
+          <h2>Rebook</h2>
+          <p>Stats</p>
+        </div>
+
+    <section id="counts" class="counts section-bg ">
+      <div class="container">
+
+        <div class="row counters">
+
+          <div class="col-lg-3 col-6 text-center">
+            <span data-toggle="counter-up">{{ngo_count}}</span>
+            <p>Ngo Registered</p>
+          </div>
+
+          <div class="col-lg-3 col-6 text-center">
+            <span data-toggle="counter-up">{{ngo_donated}}</span>
+            <p>Free Books</p>
+          </div>
+
+          <div class="col-lg-3 col-6 text-center">
+            <span data-toggle="counter-up">{{ads}}</span>
+            <p>Available Book</p>
+          </div>
+
+          <div class="col-lg-3 col-6 text-center">
+            <span data-toggle="counter-up">{{users}}</span>
+            <p>Sellers</p>
+          </div>
+
+        </div>
+    </section><!-- End Counts Section -->
+
+
+<!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>About</h2>
+          <p>About Us</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
+            <img src="{% static 'img/about.svg' %}" class="img-fluid" alt="">
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
+           <h5 class="font-italic">
+            Welcome to Rebook,the platform to buy and enlist second-hand books for resell. Buying and selling second-hand books become very simple with us.
+            You simply enlist your book for resell,interested buyer will contact you based on the information you provide on your enlisting form.
+            Buy Book section consists all the books available for resell. Buyers get all the information about the book and seller.
+            <br>
+            We have further extends our scope to <a href="{% url 'donate' %}">donate</a> the books to listed NGO's and also for individual donating. 
+             We're dedicated to providing you best experience.
+             In case of any query and complaints you can <a href="{% url 'contact' %}">Contact</a> us.
+             <br>
+        We will be happy to help you .
+        <br>
+        Sincerely,
+        <br><br>
+            </h5>
+        <p style="font-size:20px;"><strong> Priyanshu</strong></p>
+        <p>(Founder Developer)</p>
+          </div> 
+           
+      </div>
+
+      </div>
+</section><!-- End About Section -->
+
+
+  </main><!-- End #main -->
+{% endblock content %}
+  

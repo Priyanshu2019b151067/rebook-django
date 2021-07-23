@@ -1,0 +1,571 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+<section class="my-5">
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+    {% endfor %}
+{% endif %}
+ <h3 class="text-center">Free Book </h3>
+<div class="container">
+  
+    <div class="row">    
+    <div class="col-lg-6 text-center">
+        <form action="{% url 'mainsearch1' %}" method="post" class="my-3 search_form"> {% csrf_token %}
+            <input type="text" placeholder="Book by name,author,isbn" style="width:70%;" name="bs" required>
+            <button class="btn btn-primary" style="font: caption;" name="book_search" type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+    <div class="col-lg-6 text-left">
+    <div id="mySidenav" class=" sidenav my-5 float right bg-light ">
+    <a href="javascript:void(0)" class="closebtn my-3" onclick="closeNav()"><i class="fa fa-caret-left fa-2x"></i></a>
+        <br>
+<div   style="width: 340px;" id="sidebar">
+
+                  <div class="list-group panel bg-light">
+                      <a href="#menu1" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  Playschool & VI </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu1 -->
+                      <div class="collapse" id="menu1">
+                          <a href="#menu1sub1" class="list-group-item" data-toggle="collapse" aria-expanded="false">CBSE Board <i class="fa fa-chevron-down "></i></a>
+                          <div class="collapse" id="menu1sub1">
+                            <a href="{% url 'category1' %}?q=CBSE&g=Playschool" class="list-group-item" data-parent="#menu1sub1">Playschool</a>
+                            <a href="{% url 'category1' %}?q=CBSE&g=I" class="list-group-item" data-parent="#menu1sub1">Class I</a>
+                            <a href="{% url 'category1' %}?q=CBSE&g=II" class="list-group-item" data-parent="#menu1sub1">Class II</a>
+                            <a href="{% url 'category1' %}?q=CBSE&g=III" class="list-group-item" data-parent="#menu1sub1">Class III</a>
+                            <a href="{% url 'category1' %}?q=CBSE&g=IV" class="list-group-item" data-parent="#menu1sub1">Class IV</a>
+                            <a href="{% url 'category1' %}?q=CBSE&g=V" class="list-group-item" data-parent="#menu1sub1">Class V</a>
+                            <a href="{% url 'category1' %}?q=CBSE&g=VI" class="list-group-item" data-parent="#menu1sub1">Class VI</a>    
+                          </div>
+
+                          <a href="#menu1sub2" class="list-group-item" data-toggle="collapse" aria-expanded="false">ICSE Board <i class="fa fa-chevron-down "></i></a>
+                          <div class="collapse" id="menu1sub2">
+                            <a href="{% url 'category1' %}?q=ICSE&g=Playschool" class="list-group-item" data-parent="#menu1sub2">Playschool</a>
+                              <a href="{% url 'category1' %}?q=ICSE&g=I" class="list-group-item" data-parent="#menu1sub2">Class I </a>
+                              <a href="{% url 'category1' %}?q=ICSE&g=II" class="list-group-item" data-parent="#menu1sub2">Class II </a>
+                              <a href="{% url 'category1' %}?q=ICSE&g=III" class="list-group-item" data-parent="#menu1sub2">Class III</a>
+                              <a href="{% url 'category1' %}?q=ICSE&g=IV" class="list-group-item" data-parent="#menu1sub2">Class IV</a>
+                              <a href="{% url 'category1' %}?q=ICSE&g=V" class="list-group-item" data-parent="#menu1sub2">Class V</a>
+                              <a href="{% url 'category1' %}?q=ICSE&g=VI" class="list-group-item" data-parent="#menu1sub2">Class VI</a>    
+                          </div>
+                          
+                          <a href="#menu1sub3" class="list-group-item" data-toggle="collapse" aria-expanded="false">Delhi-board<i class="fa fa-chevron-down "></i></a>
+                          <div class="collapse" id="menu1sub3">
+                            <a href="{% url 'category1' %}?q=Delhi-board&g=Playschool" class="list-group-item" data-parent="#menu1sub3">Playschool</a>
+                              <a href="{% url 'category1' %}?q=Delhi-board&g=I" class="list-group-item" data-parent="#menu1sub3">Class I</a>
+                              <a href="{% url 'category1' %}?q=Delhi-board&g=II" class="list-group-item" data-parent="#menu1sub3">Class II </a>
+                              <a href="{% url 'category1' %}?q=Delhi-board&g=III" class="list-group-item" data-parent="#menu1sub3">Class III</a>
+                              <a href="{% url 'category1' %}?q=Delhi-board&g=IV" class="list-group-item" data-parent="#menu1sub3">Class IV</a>
+                              <a href="{% url 'category1' %}?q=Delhi-board&g=V" class="list-group-item" data-parent="#menu1sub3">Class V</a>
+                              <a href="{% url 'category1' %}?q=Delhi-board&g=VI" class="list-group-item" data-parent="#menu1sub3">Class VI</a>    
+                          </div>
+
+                          <a href="#menu1sub4" class="list-group-item" data-toggle="collapse" aria-expanded="false">Up-board <i class="fa fa-chevron-down "></i></a>
+                          <div class="collapse" id="menu1sub4">
+                            <a href="{% url 'category1' %}?q=Up-board&g=Playschool" class="list-group-item" data-parent="#menu1sub4">Playschool</a>
+                              <a href="{% url 'category1' %}?q=Up-board&g=I" class="list-group-item" data-parent="#menu1sub4">Class I</a>
+                              <a href="{% url 'category1' %}?q=Up-board&g=II" class="list-group-item" data-parent="#menu1sub4">Class II</a>
+                              <a href="{% url 'category1' %}?q=Up-board&g=III" class="list-group-item" data-parent="#menu1sub4">Class III</a>
+                              <a href="{% url 'category1' %}?q=Up-board&g=IV" class="list-group-item" data-parent="#menu1sub4">Class IV</a>
+                              <a href="{% url 'category1' %}?q=Up-board&g=V" class="list-group-item" data-parent="#menu1sub4">Class V</a>
+                              <a href="{% url 'category1' %}?q=Up-board&g=VI" class="list-group-item" data-parent="#menu1sub4">Class VI</a>    
+                          </div>
+
+                          <a href="#menu1sub5" class="list-group-item" data-toggle="collapse" aria-expanded="false">Other-board <i class="fa fa-chevron-down "></i></a>
+                          <div class="collapse" id="menu1sub5">
+                            <a href="{% url 'category1' %}?q=Other-board&g=Playschool" class="list-group-item" data-parent="#menu1sub5">Playschool</a>
+                              <a href="{% url 'category1' %}?q=Other-board&g=I" class="list-group-item" data-parent="#menu1sub5">Class I</a>
+                              <a href="{% url 'category1' %}?q=Other-board&g=II" class="list-group-item" data-parent="#menu1sub5">Class II </a>
+                              <a href="{% url 'category1' %}?q=Other-board&g=III" class="list-group-item" data-parent="#menu1sub5">Class III</a>
+                              <a href="{% url 'category1' %}?q=Other-board&g=IV" class="list-group-item" data-parent="#menu1sub5">Class IV</a>
+                              <a href="{% url 'category1' %}?q=Other-board&g=V" class="list-group-item" data-parent="#menu1sub5">Class V</a>
+                              <a href="{% url 'category1' %}?q=Other-board&g=VI" class="list-group-item" data-parent="#menu1sub5">Class VI</a>    
+                          </div>
+                      </div>
+
+                      <!-- menu2 -->
+                      <a href="#menu2" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp; Class VII - XII</span> <i class="fa fa-chevron-down "></i></a>
+                      <div class="collapse" id="menu2">
+                        <a href="#menu2sub1" class="list-group-item" data-toggle="collapse" aria-expanded="false">CBSE <i class="fa fa-chevron-down "></i></a>
+                        <div class="collapse" id="menu2sub1">
+                          <a href="{% url 'category1' %}?q=CBSE&g=VII" class="list-group-item" data-parent="#menu2sub1">Class VII</a>
+                            <a href="{% url 'category1' %}?q=CBSE&g=VIII" class="list-group-item" data-parent="#menu2sub1">Class VIII</a>
+                            <a href="{% url 'category1' %}?q=CBSE&g=IX" class="list-group-item" data-parent="#menu2sub1">Class IX</a>
+                            <a href="{% url 'category1' %}?q=CBSE&g=X" class="list-group-item" data-parent="#menu2sub1">Class X</a>
+                            <a href="{% url 'category1' %}?q=CBSE&g=XI" class="list-group-item" data-parent="#menu2sub1">Class XI</a>
+                            <a href="{% url 'category1' %}?q=CBSE&g=XII" class="list-group-item" data-parent="#menu2sub1">Class XII</a>
+                        </div>
+
+                        <a href="#menu2sub2" class="list-group-item" data-toggle="collapse" aria-expanded="false">ICSE <i class="fa fa-chevron-down "></i></a>
+                        <div class="collapse" id="menu2sub2">
+                            <a href="{% url 'category1' %}?q=ICSE&g=VII" class="list-group-item" data-parent="#menu2sub2">Class VII</a>
+                            <a href="{% url 'category1' %}?q=ICSE&g=VIII" class="list-group-item" data-parent="#menu2sub2">Class VIII </a>
+                            <a href="{% url 'category1' %}?q=ICSE&g=IX" class="list-group-item" data-parent="#menu2sub2">Class IX</a>
+                            <a href="{% url 'category1' %}?q=ICSE&g=X" class="list-group-item" data-parent="#menu2sub2">Class X</a>
+                            <a href="{% url 'category1' %}?q=ICSE&g=XI" class="list-group-item" data-parent="#menu2sub2">Class XI</a>
+                            <a href="{% url 'category1' %}?q=ICSE&g=XII" class="list-group-item" data-parent="#menu2sub2">Class XII</a>    
+                        </div>
+                        
+                        <a href="#menu2sub3" class="list-group-item" data-toggle="collapse" aria-expanded="false">Up-board  <i class="fa fa-chevron-down "></i></a>
+                        <div class="collapse" id="menu2sub3">
+                          <a href="{% url 'category1' %}?q=Up-board&g=VII" class="list-group-item" data-parent="#menu2sub3">Class VII</a>
+                          <a href="{% url 'category1' %}?q=Up-board&g=VIII" class="list-group-item" data-parent="#menu2sub3"> Class VIII </a>
+                          <a href="{% url 'category1' %}?q=Up-board&g=IX" class="list-group-item" data-parent="#menu2sub3">Class IX</a>
+                          <a href="{% url 'category1' %}?q=Up-board&g=X" class="list-group-item" data-parent="#menu2sub3">Class X</a>
+                          <a href="{% url 'category1' %}?q=Up-board&g=XI" class="list-group-item" data-parent="#menu2sub3">Class XI</a>
+                          <a href="{% url 'category1' %}?q=Up-board&g=XII" class="list-group-item" data-parent="#menu2sub3">Class XII</a>    
+                        </div>
+
+                        <a href="#menu2sub4" class="list-group-item" data-toggle="collapse" aria-expanded="false">Delhi-board<i class="fa fa-chevron-down "></i></a>
+                        <div class="collapse" id="menu2sub4">
+                          <a href="{% url 'category1' %}?q=Delhi-board&g=VII" class="list-group-item" data-parent="#menu2sub4">Class VII</a>
+                          <a href="{% url 'category1' %}?q=Delhi-board&g=VIII" class="list-group-item" data-parent="#menu2sub4"> Class VIII </a>
+                          <a href="{% url 'category1' %}?q=Delhi-board&g=IX" class="list-group-item" data-parent="#menu2sub4">Class IX</a>
+                          <a href="{% url 'category1' %}?q=Delhi-board&g=X" class="list-group-item" data-parent="#menu2sub4">Class X</a>
+                          <a href="{% url 'category1' %}?q=Delhi-board&g=XI" class="list-group-item" data-parent="#menu2sub4">Class XI</a>
+                          <a href="{% url 'category1' %}?q=Delhi-board&g=XII" class="list-group-item" data-parent="#menu2sub4">Class XII</a>    
+                        </div>
+
+                        <a href="#menu2sub5" class="list-group-item" data-toggle="collapse" aria-expanded="false">Other-board <i class="fa fa-chevron-down "></i></a>
+                        <div class="collapse" id="menu2sub5">
+                          <a href="{% url 'category1' %}?q=Other-board&g=VII" class="list-group-item" data-parent="#menu2sub5">Class VII</a>
+                          <a href="{% url 'category1' %}?q=Other-board&g=VIII" class="list-group-item" data-parent="#menu2sub5"> Class VIII </a>
+                          <a href="{% url 'category1' %}?q=Other-board&g=IX" class="list-group-item" data-parent="#menu2sub5">Class IX</a>
+                          <a href="{% url 'category1' %}?q=Other-board&g=X" class="list-group-item" data-parent="#menu2sub5">Class X</a>
+                          <a href="{% url 'category1' %}?q=Other-board&g=XI" class="list-group-item" data-parent="#menu2sub5">Class XI</a>
+                          <a href="{% url 'category1' %}?q=Other-board&g=XII" class="list-group-item" data-parent="#menu2sub5">Class XII</a>    
+                        </div>
+                    </div>
+
+
+{% comment %} menu3 {% endcomment %}
+   <a href="#menu3" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  Competitive Exam Books </span> <i class="fa fa-chevron-down "></i></a>
+
+   <div class="collapse" id="menu3">
+                         <a href="#menu3sub1" class="list-group-item" data-toggle="collapse" aria-expanded="false">Junior Level <i class="fa fa-chevron-down "></i></a>
+                          <div class="collapse" id="menu3sub1">
+                            <a href="{% url 'category1' %}?q=junior&g=navodaya" class="list-group-item" data-parent="#menu3sub1">Navodaya</a>
+                              <a href="{% url 'category1' %}?q=junior&g=ntse" class="list-group-item" data-parent="#menu3sub1">Ntse</a>
+                              <a href="{% url 'category1' %}?q=junior&g=olympiads" class="list-group-item" data-parent="#menu3sub1">Olympiads</a>
+                              <a href="{% url 'category1' %}?q=junior&g=kvpy" class="list-group-item" data-parent="#menu3sub1">KVPY</a>
+                              <a href="{% url 'category1' %}?q=junior&g=sat" class="list-group-item" data-parent="#menu3sub1">SAT</a>
+                               <a href="{% url 'category1' %}?q=entrance&g=compother" class="list-group-item" data-parent="#menu3sub2">Others</a>
+                          </div>
+
+                          <a href="#menu3sub2" class="list-group-item" data-toggle="collapse" aria-expanded="false">Entrance Level <i class="fa fa-chevron-down "></i></a>
+                          <div class="collapse" id="menu3sub2">
+                              <a href="{% url 'category1' %}?q=entrance&g=jee" class="list-group-item" data-parent="#menu3sub2">JEE BOOKS/MODULES</a>
+                            <a href="{% url 'category1'%}?q=entrance&g=cat" class="list-group-item" data-parent="#menu3sub2">CAT</a>
+                              <a href="{% url 'category1' %}?q=entrance&g=gmat" class="list-group-item" data-parent="#menu3sub2">GMAT</a>
+                              <a href="{% url 'category1' %}?q=entrance&g=gre-gate" class="list-group-item" data-parent="#menu3sub2">GRE/GATE</a>
+                              <a href="{% url 'category1' %}?q=entrance&g=neet" class="list-group-item" data-parent="#menu3sub2">NEET BOOKS/MODULES</a>
+                              <a href="{% url 'category1' %}?q=entrance&g=compother" class="list-group-item" data-parent="#menu3sub2">Others</a>
+                          </div>
+                          
+                          <a href="#menu3sub3" class="list-group-item" data-toggle="collapse" aria-expanded="false">Government Jobs Exam <i class="fa fa-chevron-down "></i></a>
+                          <div class="collapse" id="menu3sub3">
+                              <a href="{% url 'category1' %}?q=government&g=upse" class="list-group-item" data-parent="#menu3sub3">UPSE Books/Module</a>
+                              <a href="{% url 'category1' %}?q=government&g=nda-cds" class="list-group-item" data-parent="#menu3sub3">NDA/CDS Books/Module</a>
+                              <a href="{% url 'category1' %}?q=government&g=banking" class="list-group-item" data-parent="#menu3sub3">Banking Exam Book</a>
+                              <a href="{% url 'category1' %}?q=government&g=railway" class="list-group-item" data-parent="#menu3sub3">Railway Exam Book</a>
+                              <a href="{% url 'category1' %}?q=government&g=ssc" class="list-group-item" data-parent="#menu3sub3">SSC Exam Book</a>
+                              <a href="{% url 'category1' %}?q=government&g=teaching-related" class="list-group-item" data-parent="#menu3sub3">Government Teacher Exam Books </a>
+                              <a href="{% url 'category1' %}?q=entrance&g=compother" class="list-group-item" data-parent="#menu3sub2">Others</a> 
+                          </div>
+                      </div>
+
+{% comment %} menu 4 {% endcomment %}
+
+  <a href="#menu4" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  Engineering Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu1 -->
+                      <div class="collapse" id="menu4">
+                          <a href="#menu4sub1" class="list-group-item" data-toggle="collapse" aria-expanded="false">First Year <i class="fa fa-chevron-down "></i></a>
+                          <div class="collapse" id="menu4sub1">
+                              <a href="{% url 'category1' %}?q=first&g=faero" class="list-group-item" data-parent="#menu4sub1">Aerospace/Aeronautics</a>
+                              <a href="{% url 'category1' %}?q=first&g=fce" class="list-group-item" data-parent="#menu4sub1">Computer Engineering </a>
+                              <a href="{% url 'category1' %}?q=first&g=fchemical" class="list-group-item" data-parent="#menu4sub1">Chemical Engineering</a>
+                              <a href="{% url 'category1' %}?q=first&g=fcivil" class="list-group-item" data-parent="#menu4sub1">Civil Engineering</a>
+                            <a href="{% url 'category1' %}?q=first&g=fece" class="list-group-item" data-parent="#menu4sub1">Electronics and Communication</a>
+                              <a href="{% url 'category1' %}?q=first&g=felectrical" class="list-group-item" data-parent="#menu4sub1">Electrical Engineering</a>
+                              <a href="{% url 'category1' %}?q=first&g=fit" class="list-group-item" data-parent="#menu4sub1">Information Technology</a>    
+                              <a href="{% url 'category1' %}?q=first&g=fmech" class="list-group-item" data-parent="#menu4sub1">Mechanical Engineering</a>    
+                              <a href="{% url 'category1' %}?q=first&g=fothers" class="list-group-item" data-parent="#menu4sub1">Other Branches</a>    
+
+                          </div>
+
+                          <a href="#menu4sub2" class="list-group-item" data-toggle="collapse" aria-expanded="false">Second Year <i class="fa fa-chevron-down "></i></a>
+                          <div class="collapse" id="menu4sub2">
+                            <a href="{% url 'category1' %}?q=second&g=saero" class="list-group-item" data-parent="#menu4sub2">Aerospace/Aeronautics</a>
+                              <a href="{% url 'category1' %}?q=second&g=sce" class="list-group-item" data-parent="#menu4sub2">Computer Engineering </a>
+                              <a href="{% url 'category1' %}?q=second&g=schemical" class="list-group-item" data-parent="#menu4sub2">Chemical Engineering</a>
+                              <a href="{% url 'category1' %}?q=second&g=scivil" class="list-group-item" data-parent="#menu4sub2">Civil Engineering</a>
+                              <a href="{% url 'category1' %}?q=second&g=sece" class="list-group-item" data-parent="#menu4sub2">Electronics and Communication</a>
+                              <a href="{% url 'category1' %}?q=second&g=selectrical" class="list-group-item" data-parent="#menu4sub2">Electrical Engineering</a>
+                              <a href="{% url 'category1' %}?q=second&g=sit" class="list-group-item" data-parent="#menu4sub2">Information Technology</a>    
+                              <a href="{% url 'category1' %}?q=second&g=smech" class="list-group-item" data-parent="#menu4sub2">Mechanical Engineering</a>    
+                              <a href="{% url 'category1' %}?q=second&g=sothers" class="list-group-item" data-parent="#menu4sub2">Other Branches</a>    
+                          </div>
+                          
+                          <a href="#menu4sub3" class="list-group-item" data-toggle="collapse" aria-expanded="false">Third Year<i class="fa fa-chevron-down "></i></a>
+                          <div class="collapse" id="menu4sub3">
+                           <a href="{% url 'category1' %}?q=third&g=taero" class="list-group-item" data-parent="#menu4sub3">Aerospace/Aeronautics</a>
+                              <a href="{% url 'category1' %}?q=third&g=tce" class="list-group-item" data-parent="#menu4sub3">Computer Engineering </a>
+                              <a href="{% url 'category1' %}?q=third&g=tchemical" class="list-group-item" data-parent="#menu4sub3">Chemical Engineering</a>
+                              <a href="{% url 'category1' %}?q=third&g=tcivil" class="list-group-item" data-parent="#menu4sub3">Civil Engineering</a>
+                              <a href="{% url 'category1' %}?q=third&g=tece" class="list-group-item" data-parent="#menu4sub3">Electronics and Communication</a>
+                              <a href="{% url 'category1' %}?q=third&g=telectrical" class="list-group-item" data-parent="#menu4sub3">Electrical Engineering</a>
+                              <a href="{% url 'category1' %}?q=third&g=tit" class="list-group-item" data-parent="#menu4sub3">Information Technology</a>    
+                              <a href="{% url 'category1' %}?q=third&g=tmech" class="list-group-item" data-parent="#menu4sub3">Mechanical Engineering</a>    
+                              <a href="{% url 'category1' %}?q=third&g=tothers" class="list-group-item" data-parent="#menu4sub3">Other Branches</a>    
+                          </div>
+
+                          <a href="#menu4sub4" class="list-group-item" data-toggle="collapse" aria-expanded="false">Fourth Year<i class="fa fa-chevron-down "></i></a>
+                          <div class="collapse" id="menu4sub4">
+                              <a href="{% url 'category1' %}?q=fourth&g=foaero" class="list-group-item" data-parent="#menu4sub4">Aerospace/Aeronautics</a>
+                              <a href="{% url 'category1' %}?q=fourth&g=foce" class="list-group-item" data-parent="#menu4sub4">Computer Engineering </a>
+                              <a href="{% url 'category1' %}?q=fourth&g=fochemical" class="list-group-item" data-parent="#menu4sub4">Chemical Engineering</a>
+                              <a href="{% url 'category1' %}?q=fourth&g=focivil" class="list-group-item" data-parent="#menu4sub4">Civil Engineering</a>
+                              <a href="{% url 'category1' %}?q=fourth&g=foece" class="list-group-item" data-parent="#menu4sub4">Electronics and Communication</a>
+                              <a href="{% url 'category1' %}?q=fourth&g=foelectrical" class="list-group-item" data-parent="#menu4sub4">Electrical Engineering</a>
+                              <a href="{% url 'category1' %}?q=fourth&g=foit" class="list-group-item" data-parent="#menu4sub4">Information Technology</a>    
+                              <a href="{% url 'category1' %}?q=fourth&g=fomech" class="list-group-item" data-parent="#menu4sub4">Mechanical Engineering</a>    
+                              <a href="{% url 'category1' %}?q=fourth&g=foothers" class="list-group-item" data-parent="#menu4sub4">Other Branches</a>    
+                          </div>
+                      </div>
+{% comment %} menu5 {% endcomment %}
+
+
+
+
+  <a href="#menu5" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  Medical Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu1 -->
+                      <div class="collapse" id="menu5">
+                          <a href="#menu5sub1" class="list-group-item" data-toggle="collapse" aria-expanded="false">Subjects<i class="fa fa-chevron-down "></i></a>
+                          <div class="collapse" id="menu5sub1">
+                              <a href="{% url 'category1' %}?q=medical&g=Anatomy" class="list-group-item" data-parent="#menu5sub1">Anatomy</a>
+                              <a href="{% url 'category1' %}?q=medical&g=Anesthesiology" class="list-group-item" data-parent="#menu5sub1">Anesthesiology</a>
+                              <a href="{% url 'category1' %}?q=medical&g=Biochemistry" class="list-group-item" data-parent="#menu5sub1">Biochemistry</a>
+                              <a href="{% url 'category1' %}?q=medical&g=CommunityMedicine" class="list-group-item" data-parent="#menu5sub1">Community Medicine</a>
+                                <a href="{% url 'category1' %}?q=medical&g=Cardiology" class="list-group-item" data-parent="#menu5sub1">Cardiology</a>
+                              <a href="{% url 'category1' %}?q=medical&g=Dermatology" class="list-group-item" data-parent="#menu5sub1">Dermatology</a>
+                              <a href="{% url 'category1' %}?q=medical&g=ECG" class="list-group-item" data-parent="#menu5sub1">ECG</a>    
+                              <a href="{% url 'category1' %}?q=medical&g=ENT" class="list-group-item" data-parent="#menu5sub1">ENT</a>    
+                              <a href="{% url 'category1' %}?q=medical&g=ForensicMedicine" class="list-group-item" data-parent="#menu5sub1">ForensicMedicine</a>   
+                              <a href="{% url 'category1' %}?q=medical&g=ObstetricsandGynaecology" class="list-group-item" data-parent="#menu5sub1">ObstetricsandGynaecology</a>    
+                              <a href="{% url 'category1' %}?q=medical&g=Orthopedics" class="list-group-item" data-parent="#menu5sub1">Orthopedics</a>    
+                              <a href="{% url 'category1' %}?q=medical&g=Opthalmology" class="list-group-item" data-parent="#menu5sub1">Opthalmology</a>     
+                              <a href="{% url 'category1' %}?q=medical&g=Microbiology" class="list-group-item" data-parent="#menu5sub1">Microbiology</a>    
+                              <a href="{% url 'category1' %}?q=medical&g=Medicine" class="list-group-item" data-parent="#menu5sub1">Medicine</a>
+                              <a href="{% url 'category1' %}?q=medical&g=Pathology" class="list-group-item" data-parent="#menu5sub1">Pathology</a>    
+                              <a href="{% url 'category1' %}?q=medical&g=Physiology" class="list-group-item" data-parent="#menu5sub1">Physiology</a>     
+                              <a href="{% url 'category1' %}?q=medical&g=Pediatrics" class="list-group-item" data-parent="#menu5sub1">Pediatrics</a>    
+                              <a href="{% url 'category1' %}?q=medical&g=Pharmacology" class="list-group-item" data-parent="#menu5sub1">Pharmacology</a>        
+                              <a href="{% url 'category1' %}?q=medical&g=Surgery" class="list-group-item" data-parent="#menu5sub1">Surgery</a>        
+                              <a href="{% url 'category1' %}?q=medical&g=mfothers" class="list-group-item" data-parent="#menu5sub1">Others</a>        
+                          </div>
+                      </div>
+
+  <a href="#menu6" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  B.Sc Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu6 -->
+                      <div class="collapse" id="menu6">
+                          <a href="{% url 'category1' %}?q=bsc_first&g=bsci" class="list-group-item" data-parent="#menu6" >First Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bsc_second&g=bscii"  class="list-group-item" data-parent="#menu6"  >Second Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bsc_third&g=bsciii" class="list-group-item" data-parent ="#menu6">Third Year<i class="fa fa-chevron-right "></i></a>
+                      </div>
+
+
+  <a href="#menu7" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  B.E Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu7">
+                          <a href="{% url 'category1' %}?q=be_first&g=bei" class="list-group-item" data-parent="#menu7" >First Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=be_second&g=beii"  class="list-group-item" data-parent="#menu7"  >Second Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=be_third&g=beiii" class="list-group-item" data-parent ="#menu7">Third Year<i class="fa fa-chevron-right "></i></a>
+                           <a href="{% url 'category1' %}?q=be_fourth&g=beiv" class="list-group-item" data-parent ="#menu7">Fourth Year<i class="fa fa-chevron-right "></i></a>
+                      </div>
+   <a href="#menu8" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  B.C.A Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu8 -->
+                      <div class="collapse" id="menu8">
+                          <a href="{% url 'category1' %}?q=bca_first&g=bcai" class="list-group-item" data-parent="#menu8" >First Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bca_second&g=bcaii"  class="list-group-item" data-parent="#menu8"  >Second Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bca_third&g=bcaiii" class="list-group-item" data-parent ="#menu8">Third Year<i class="fa fa-chevron-right "></i></a>
+                      </div>
+  
+   <a href="#menu9" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  M.sc Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu9 -->
+                      <div class="collapse" id="menu9">
+                          <a href="{% url 'category1' %}?q=msc_first&g=msci" class="list-group-item" data-parent="#menu9" >First Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=msc_second&g=mscii"  class="list-group-item" data-parent="#menu9"  >Second Year <i class="fa fa-chevron-right "></i></a>
+
+                      </div>
+   <a href="#menu10" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  M.tech Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu10">
+                          <a href="{% url 'category1' %}?q=mtech_first&g=mtechi" class="list-group-item" data-parent="#menu10" >First Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=mtech_second&g=mtechii"  class="list-group-item" data-parent="#menu10"  >Second Year <i class="fa fa-chevron-right "></i></a>
+
+                      </div>
+   <a href="#menu11" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  BAMS Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu11">
+                          <a href="{% url 'category1' %}?q=bams_first&g=bamsi" class="list-group-item" data-parent="#menu11" >First Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bams_second&g=bamsii"  class="list-group-item" data-parent="#menu11"  >Second Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bams_third&g=bamsiii" class="list-group-item" data-parent="#menu11" >Third Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bams_fourth&g=bamsiv"  class="list-group-item" data-parent="#menu11"  >Fourth Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bams_fifth&g=bamsv"  class="list-group-item" data-parent="#menu11"  >Final Year <i class="fa fa-chevron-right "></i></a>
+                      </div>
+     <a href="#menu12" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  BHMS Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu12">
+                          <a href="{% url 'category1' %}?q=bhms_first&g=bhmsi" class="list-group-item" data-parent="#menu12" >First Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bhms_second&g=bhmsii"  class="list-group-item" data-parent="#menu12"  >Second Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bhms_third&g=bhmsiii" class="list-group-item" data-parent="#menu12" >Third Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bhms_fourth&g=bhmsiv"  class="list-group-item" data-parent="#menu12"  >Fourth Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bhms_fifth&g=bhmsv"  class="list-group-item" data-parent="#menu12"  >Final Year <i class="fa fa-chevron-right "></i></a>
+                      </div>
+    <a href="#menu13" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  BUMS Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu13">
+                          <a href="{% url 'category1' %}?q=bums_first&g=bumsi" class="list-group-item" data-parent="#menu13" >First Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bums_second&g=bumsii"  class="list-group-item" data-parent="#menu13"  >Second Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bums_third&g=bumsiii" class="list-group-item" data-parent="#menu13" >Third Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bums_fourth&g=bumsiv"  class="list-group-item" data-parent="#menu13"  >Fourth Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bums_fifth&g=bumsv"  class="list-group-item" data-parent="#menu13"  >Final Year <i class="fa fa-chevron-right "></i></a>
+                      </div>
+    <a href="#menu14" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  BA Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu14">
+                          <a href="{% url 'category1' %}?q=ba_first&g=bai" class="list-group-item" data-parent="#menu14" >First Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=ba_second&g=baii"  class="list-group-item" data-parent="#menu14"  >Second Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=ba_third&g=baiii" class="list-group-item" data-parent="#menu14" >Final Year <i class="fa fa-chevron-right "></i></a>
+                     
+                      </div>
+    <a href="#menu15" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  BFA Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu15">
+                          <a href="{% url 'category1' %}?q=bfa_first&g=bfai" class="list-group-item" data-parent="#menu15" >First Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bfa_second&g=bfaii"  class="list-group-item" data-parent="#menu15"  >Second Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bfa_third&g=bfaiii" class="list-group-item" data-parent="#menu15" >Final Year <i class="fa fa-chevron-right "></i></a>
+                   
+                      </div>
+    <a href="#menu16" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  BBA Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu16">
+                          <a href="{% url 'category1' %}?q=bba_first&g=bbai" class="list-group-item" data-parent="#menu16" >First Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bba_second&g=bbaii"  class="list-group-item" data-parent="#menu16"  >Second Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bba_third&g=bbaiii" class="list-group-item" data-parent="#menu16" >Third Year <i class="fa fa-chevron-right "></i></a>
+                       
+                      </div>
+    <a href="#menu17" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  BA+LLB Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu17">
+                          <a href="{% url 'category1' %}?q=bllb_first&g=bllbi" class="list-group-item" data-parent="#menu17" >First Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bllb_second&g=bllbii"  class="list-group-item" data-parent="#menu17"  >Second Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bllb_third&g=bllbiii" class="list-group-item" data-parent="#menu17" >Third Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bllb_fourth&g=bllbiv"  class="list-group-item" data-parent="#menu17"  >Fourth Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bllb_fifth&g=bllbv"  class="list-group-item" data-parent="#menu17"  >Final Year <i class="fa fa-chevron-right "></i></a>
+                      </div>
+    <a href="#menu18" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  BJM Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu18">
+                          <a href="{% url 'category1' %}?q=bjm_first&g=bjmi" class="list-group-item" data-parent="#menu18" >First Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bjm_second&g=bjmii"  class="list-group-item" data-parent="#menu18"  >Second Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bjm_third&g=bjmiii" class="list-group-item" data-parent="#menu18" >Final Year <i class="fa fa-chevron-right "></i></a>
+
+                      </div>
+       <a href="#menu19" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  BHM Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu19">
+                          <a href="{% url 'category1' %}?q=bhm_first&g=bhmi" class="list-group-item" data-parent="#menu19" >First Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bhm_second&g=bhmii"  class="list-group-item" data-parent="#menu19"  >Second Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bhm_third&g=bhmiii" class="list-group-item" data-parent="#menu19" >Third Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bhm_fourth&g=bhmiv"  class="list-group-item" data-parent="#menu19"  >Final Year <i class="fa fa-chevron-right "></i></a>
+                       
+                      </div>
+            <a href="#menu20" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  B.Com Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu20">
+                          <a href="{% url 'category1' %}?q=bcom_first&g=bcomi" class="list-group-item" data-parent="#menu20" >First Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bcom_second&g=bcomii"  class="list-group-item" data-parent="#menu20"  >Second Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bcom_third&g=bcomiii" class="list-group-item" data-parent="#menu20" >Final Year <i class="fa fa-chevron-right "></i></a>
+                      </div>
+            <a href="#menu21" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  B.L.ed Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu21">
+                          <a href="{% url 'category1' %}?q=bld_first&g=bldi" class="list-group-item" data-parent="#menu21" >First Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bld_second&g=bldii"  class="list-group-item" data-parent="#menu21"  >Second Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bld_third&g=bldiii" class="list-group-item" data-parent="#menu21" >Third Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bld_fourth&g=bldiv"  class="list-group-item" data-parent="#menu21"  >Fourth Year <i class="fa fa-chevron-right "></i></a>
+                         
+                      </div>
+               <a href="#menu35" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  B.ed Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu35">
+                          <a href="{% url 'category1' %}?q=bed_first&g=bedi" class="list-group-item" data-parent="#menu35" >First Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=bed_second&g=bedii"  class="list-group-item" data-parent="#menu35"  >Second Year <i class="fa fa-chevron-right "></i></a>
+                         
+                      </div>
+                   <a href="#menu36" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  B.Tc Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu36">
+                          <a href="{% url 'category1' %}?q=btc_first&g=btci" class="list-group-item" data-parent="#menu36" >First Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=btc_second&g=btcii"  class="list-group-item" data-parent="#menu36"  >Second Year <i class="fa fa-chevron-right "></i></a>  
+                      </div>
+
+            <a href="#menu22" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  LLB Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu22">
+                          <a href="{% url 'category1' %}?q=llb_first&g=llbi" class="list-group-item" data-parent="#menu22" >First Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=llb_second&g=llbii"  class="list-group-item" data-parent="#menu22"  >Second Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=llb_third&g=llbiii" class="list-group-item" data-parent="#menu22" >Final Year <i class="fa fa-chevron-right "></i></a>
+                      </div>
+            <a href="#menu23" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  CA Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu23">
+                          <a href="{% url 'category1' %}?q=ca_first&g=cai" class="list-group-item" data-parent="#menu23" >First Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=ca_second&g=caii"  class="list-group-item" data-parent="#menu23"  >Second Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=ca_third&g=caiii" class="list-group-item" data-parent="#menu23" >Third Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=ca_fourth&g=caiv"  class="list-group-item" data-parent="#menu23"  >Fourth Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=ca_fifth&g=cav"  class="list-group-item" data-parent="#menu23"  >Final Year <i class="fa fa-chevron-right "></i></a>
+                      </div>
+            <a href="#menu24" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  CS Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu24">
+                          <a href="{% url 'category1' %}?q=cs_first&g=csi" class="list-group-item" data-parent="#menu24" >Course Books<i class="fa fa-chevron-right "></i></a> 
+                      </div>
+            <a href="#menu25" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  CMA Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <div class="collapse" id="menu25">
+                          <a href="{% url 'category1' %}?q=cma_first&g=cmai" class="list-group-item" data-parent="#menu25" >First Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=cma_second&g=cmaii"  class="list-group-item" data-parent="#menu25"  >Second Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=cma_third&g=cmaiii" class="list-group-item" data-parent="#menu25" >Third Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=cma_fourth&g=cmaiv"  class="list-group-item" data-parent="#menu25"  >Final Year <i class="fa fa-chevron-right "></i></a>
+                      </div>
+    <a href="#menu26" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  CFP Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu26">
+                          <a href="{% url 'category1' %}?q=cfp_first&g=cfpi" class="list-group-item" data-parent="#menu26" >Course Books <i class="fa fa-chevron-right "></i></a>
+                      </div>
+    <a href="#menu27" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  M.Com Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu27">
+                          <a href="{% url 'category1' %}?q=mcom_first&g=mcomi" class="list-group-item" data-parent="#menu27" >First Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=mcom_second&g=mcomii"  class="list-group-item" data-parent="#menu27"  >Final Year <i class="fa fa-chevron-right "></i></a>   
+                      </div>
+    <a href="#menu28" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  MBA Books </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu28">
+                          <a href="{% url 'category1' %}?q=mba_first&g=mbai" class="list-group-item" data-parent="#menu28" >First Year <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=mba_second&g=mbaii"  class="list-group-item" data-parent="#menu28"  >Final Year <i class="fa fa-chevron-right "></i></a>      
+                      </div>
+<a href="#menu29" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  Languages Book </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu29">
+                          <a href="{% url 'category1' %}?q=sanskrit&g=Sanskrit" class="list-group-item" data-parent="#menu29" >Sanskrit Books <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=hindi&g=Hindi"  class="list-group-item" data-parent="#menu29"  >Hindi Books <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=english&g=English" class="list-group-item" data-parent="#menu29" >English Books <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=french&g=French"  class="list-group-item" data-parent="#menu29"  >French  Books <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=language_others&g=LangOthers"  class="list-group-item" data-parent="#menu29"  >Other Language Books <i class="fa fa-chevron-right "></i></a>
+                      </div>
+<a href="#menu30" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  Fiction & Non-Fiction Book </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu30">
+                          <a href="{% url 'category1' %}?q=astrology&g=Astrology" class="list-group-item" data-parent="#menu30" >Astrology<i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=business&g=Business"  class="list-group-item" data-parent="#menu30"  >Business <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=health&g=Health" class="list-group-item" data-parent="#menu30" >Health<i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=history&g=HistoryPolitics"  class="list-group-item" data-parent="#menu30"  >History/Politics <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=sports&g=SportsGames"  class="list-group-item" data-parent="#menu30"  >Sports/Games <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=fiction_other&g=FictionalOther"  class="list-group-item" data-parent="#menu30"  >FictionalOther <i class="fa fa-chevron-right "></i></a>
+                      </div>
+
+<a href="#menu31" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  Entertainment </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu31">
+                          <a href="{% url 'category1' %}?q=magazine&g=Magazine" class="list-group-item" data-parent="#menu31" >Magazine<i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=comicbooks&g=ComicBooks"  class="list-group-item" data-parent="#menu31"  >Comic Books<i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=StoryBook&g=StoryBook" class="list-group-item" data-parent="#menu31" >Story Books <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=PoemBook&g=PoemBook"  class="list-group-item" data-parent="#menu31"  >Poem Books <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=entertainment_others&g=OtherEntertainment"  class="list-group-item" data-parent="#menu31"  >Others <i class="fa fa-chevron-right "></i></a>                     
+                      </div>
+
+<a href="#menu32" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  Self-help Spirituality </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu32">
+                          <a href="{% url 'category1' %}?q=self_help&g=self_help" class="list-group-item" data-parent="#menu32" >Self Help <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=spirituality&g=spirituality"  class="list-group-item" data-parent="#menu32"  >Spirituality <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=sh_others&g=shspo" class="list-group-item" data-parent="#menu32" >Others <i class="fa fa-chevron-right "></i></a>
+                      </div>
+
+
+
+<a href="#menu33" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  Finance and Economy </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu33">
+                          <a href="{% url 'category1' %}?q=finance&g=finance" class="list-group-item" data-parent="#menu33" >Finance Books <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=economy&g=economy"  class="list-group-item" data-parent="#menu33"  >Economy books <i class="fa fa-chevron-right "></i></a>
+                          <a href="{% url 'category1' %}?q=feo&g=feo" class="list-group-item" data-parent="#menu30" >Other books <i class="fa fa-chevron-right "></i></a>
+                      </div>
+
+<a href="#menu34" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><span class="hidden-sm-down"> &nbsp;&nbsp;  Others </span> <i class="fa fa-chevron-down "></i></a>
+                      <!-- #menu7 -->
+                      <div class="collapse" id="menu34">
+                          <a href="{% url 'category1' %}?q=other_other&g=Other" class="list-group-item" data-parent="#menu30" >Other Books<i class="fa fa-chevron-right "></i></a>
+                      </div>
+
+
+
+
+
+<br><br><br><br>
+</div>
+</div>
+
+    </div>
+   <p class="text-center" style="margin-top: 11px;"><span style="font-size:14px;cursor:pointer;" onclick="openNav()" class="btn btn-primary text-center"><strong><i class="fa fa-caret-left"></i> &nbsp; &nbsp;</strong>Category  </span></p>
+  </div>
+</div>
+ <h2 class="text-center mt-5">Recently Listed</h2>
+    <div class="row my-5">
+  {% for book in books %}
+ <div class="col-lg-4 col-md-6  d-flex justify-content-center">
+    <div class="card mr-2 ml-2 my-3 bg-light page_pr" >
+                        <h3 class="mb-0">
+                    <span  class="badge badge-info text-white ">Free<span> 
+                    </h3> 
+            <div class="card-body">
+                <h5 class="card-title" style="font-weight:bold;overflow-wrap: anywhere; font-size:19px;color: white;background: black;padding: 0.25rem 0.5rem;border-radius: 4px;">{{book.bookname  | title}}</h5>
+                  <p class="" style="font-weight:1000;overflow-wrap: anywhere;"><i class="fas fa-pencil-alt"></i> {{book.author | title}}</p>
+                  <p class="" style="font-weight:1000;overflow-wrap: anywhere;"> Pub : {{book.publisher_detail | title}}</p>
+                  <p class="" style="font-weight:1000;overflow-wrap: anywhere;"><i class="fa fa-map-marker fa-lg"></i> {{book.donar_city | title}}</p>
+                <a href="{% url 'donate_details' book.donarname book.bookname %}" class="btn btn-primary">Full Details</a>
+                {% ifequal request.user book.acc_holder %}
+                <a href="{% url 'delete_page' book.donarname book.bookname %}" class="btn btn-danger  delete_ad">Delete</a>
+                {% endifequal %}
+                 <br>
+                 <span class="badge badge-secondary" style="font-size:12px">Posted {{book.pub_date | timesince }} ago</span>
+            </div> 
+             <div class="card-footer text-muted " >
+                <a href="https://wa.me/+91{{book.donarwhatsapp}}" 
+                class="whatsapp_style"  target="_blank">
+                                <i class="fa fa-whatsapp fa-2x"></i>
+                </a>
+             
+                <a class="phone_style"  href="tel:+91 {{book.donarphone}}">
+                <i class="fa fa-phone fa-2x" style="cursor: pointer;"></i>
+                </a>
+                
+            </div>
+       </div> 
+       </div> 
+{% endfor %}
+    </div> 
+</div> 
+</section>
+{% endblock content %}
+
+               

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="my-5"></section>
+ {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %} 
+ <div class="text-center">
+<a href="{% url 'category' %}?board={{board}}&genre={{genre}}" id="stepper" class="previous round"><<</a>
+</div> 
+{% endblock content %}

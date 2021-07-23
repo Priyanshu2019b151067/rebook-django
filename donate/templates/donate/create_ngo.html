@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="my-3">
+
+{% if res %}
+<div class="alert alert-primary my-5" role="alert">
+    Your details has been successfully sent.
+    <br>
+    <strong> You will get a activation link on registered mail <strong>
+    <br>
+    Others details will be verified by our team. 
+    Thank you for Registering.
+    <br>
+    <strong>TEAM REBOOK</strong>
+</div>
+{% else %}
+
+<div class="container">
+<div class="row">
+<div class="col-lg-8">
+  <h2 class="">List Ngo</h2>
+<div class="card">
+   
+  <div class="card-body text-center">
+  {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-danger" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+{% endif %}
+<form action="" method="post"> {% csrf_token %}
+   <div class="form-group">
+    <input type="text" id="ngo_name" name="ngo_name" class="ngo_class" placeholder="Ngo Name"required>
+    </div>
+    <div class="form-group">
+    <input type="text" id="ngo_aim" name="ngo_aim" class="ngo_class" placeholder="Ngo Aim" required>
+    </div> 
+    <div class="form-group">
+    <input type="text" id="ngo_website" name="ngo_website" class="ngo_class" placeholder="Ngo Website" required>
+    </div>                     
+    <div class="form-group">
+      <input type="text" id="ngolocation" name="ngolocation" class="ngo_class" placeholder="Address" required>
+    </div>
+    <div class="form-group">
+      <input type="text" id="ngostate" placeholder="State" name="ngostate" class="ngo_class" required>
+    </div>
+    <div class="form-group">
+      <input type="text" id="ngopincode" placeholder="Pincode" name="ngopincode" class="ngo_class" required>
+    </div>
+     <div class="form-group">
+    <input type="text" id="Associated" name="associated" placeholder="Associted Org." class="ngo_class">
+    </div>
+
+    <div class="form-group">
+    
+    <input type="text" id="ngo_head" placeholder="Ngo-head name" name="ngo_head" class="ngo_class" required>
+    </div>
+
+    <div class="form-group">
+    <input type="text" id="phone_num" placeholder="Contact No."  name="phone_num" class="ngo_class" required>
+    </div>
+ 
+     <div class="form-group"> 
+    <input type="email" id="ngo_email" placeholder="Mail Address" name="ngo_email" class="ngo_class" required>
+    </div>
+    <div class="form-group">
+    <input type="text" id="ngo_whatsapp" placeholder="Whatsapp No." name="ngo_whatsapp" class="ngo_class" required>
+    </div>
+    <input type="submit" value="Submit" class="btn btn-primary">
+</form>
+</div>
+</div>
+</div>
+  <div class="col-lg-4">
+  <img src="{% static 'img/SupportTeam.svg' %}" alt="supportteam" style="width: 100%;" class="mt-3"></div>
+  </div>
+</div>
+   
+
+
+{% endif %}
+
+</section>
+
+
+{% endblock content %}

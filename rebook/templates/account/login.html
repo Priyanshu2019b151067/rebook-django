@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load account socialaccount %}
+{% block content %}
+<section class="my-4">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            {% comment %} <h2>Login</h2> {% endcomment %}
+            <div class="card">
+            <div class="card-body">
+            {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+    {% endfor %}
+    {% endif %}
+
+
+
+{% get_providers as socialaccount_providers %}
+
+    {% if socialaccount_providers %}
+    <p>Donot have a account ? &nbsp;<a href="{{ signup_url }}">Sign up</a>
+    <br>
+    <p class="text-center">Or Signup With </p> 
+    {% comment %} Signup up with social accounts . {{ site_name }} account and sign in below</p> {% endcomment %}
+    <div class="socialaccount_ballot text-center" style="margin-right: 12%;">
+
+      <ul class="socialaccount_providers " style= "list-style-type: none;">
+        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+      </ul>
+
+      <div class="login-or"></div>
+
+    </div>
+    {% endif %}
+<div class="card" style="min-height: 230px;">
+  <h4 class="text-center mt-2">Login</h4>
+<div class="card-body">
+
+<form class="login text-center mt-3" method="POST" action="{% url 'account_login' %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"  />
+  {% endif %}
+  <a class="button secondaryAction" href="{% url 'account_reset_password' %}"></a>
+  <button  class="btn btn-primary text-left" type="submit">Login</button>
+</form>
+
+</div></div>
+
+{% comment %} class="primaryAction" {% endcomment %}
+
+
+
+
+                 {% comment %} <form action="" method="post" class="text-center"> {% csrf_token %}
+                    <input type="text" name="username" id="username" placeholder="Username or Email" required>
+                    <br><br>
+                    <input style="margin-left:1.25rem;" type="password" name="password" id="password1" placeholder="Password" required>
+                    <i class="fa fa-eye-slash " id="togglePassword1" style=" 
+                     cursor: pointer;"></i> 
+                     <br><br>
+                         <input type="submit" value="Login" class="btn btn-primary text-left" >
+                    <br><br>
+                    <p class="">Don't have account ?<a href="{% url 'register' %}"> Create</a></p>
+                    <p class="">Forget Password?<a href="{% url 'password_reset' %}">Reset Password</a></p>
+                </form> {% endcomment %}
+            </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <img src="{% static 'img/login.png' %}" alt="LoginPage" class="login_img">
+        </div>
+    </div>
+</div>
+</section>
+
+{% endblock content %}
+
+
+
+
+

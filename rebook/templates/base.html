@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load account socialaccount %}
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Rebook - Resell Buy Donate Books</title>
+  <meta content="Rebook is your source for advertising second-hand books for reselling and donating.Rebook makes it easier for you get info about second-hand books in your area." name="description">
+
+{% comment %} Font Awesome {% endcomment %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+  <!-- Favicons -->
+  <link href="{% static 'img/favicon.ico' %}" rel="icon">
+  <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendor/icofont/icofont.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendor/boxicons/css/boxicons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendor/remixicon/remixicon.css' %}">
+  <link rel="stylesheet" href="{% static 'vendor/owl.carousel/assets/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendor/animate.css/animate.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendor/aos/aos.css' %}">
+ 
+  <!-- Template Main CSS File -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+     
+      <a href="{% url 'home' %}" class="logo mr-auto"><img src="{% static 'img/rebook_logo.png' %}" alt="logo" class="img-fluid" style="padding-left:23px;"></a>
+    
+    <div class="mobile-login d-lg-none">
+      {% if user.is_authenticated %}   
+      <a class="signlog" href="{% url 'account_logout' %}">Logout</a>
+      {% else %}
+     <a class ="signlog" href="{% url 'account_login' %}" >Login <i class="fa fa-sign-in"></i></a>
+      <a class="signlog" href="{% url 'account_signup' %}" >Signup<i class="fa fa-user-plus"></i></a>
+      {% endif %}
+  </div>
+      <nav class="nav-menu d-none d-lg-block">
+        <ul >
+        
+          <li class=""><a href="{% url 'buy_book' %}">Buy Book</a></li>
+         <li>
+          <a href="{% url 'enlist_book' %}">Sell Book</a>
+        </li>
+          <li class=""><a href="{% url 'available_books' %}">Free Books</a></li>
+          <li class=""><a href="{% url 'donate' %}">Donate Book <i class="fa fa-heart"></i></a></li>
+          {% if user.is_authenticated %}   
+        <li><a href="{% url 'profile' %}">{{request.user.username}} <i class="fa fa-angle-down fa-lg" aria-hidden="true"></i></a></li>
+        <li>
+          <a href ="javascript:{document.getElementById('logout').submit()}" onclick="">Logout</a>
+          <form id="logout" method = "POST" action = "{% url 'account_logout' %}">{% csrf_token %}
+        <input type="hidden" >
+
+          </form>
+        </li>
+         {% else %}
+          
+          <li><a href="{% url 'account_login' %}">Login <i class="fa fa-sign-in"></i></a></li>
+          <li><a href="{% url 'account_signup' %}">Register  <i class="fa fa-user-plus"></i></a></li> 
+      {% endif %}  
+        </ul>
+      </nav> 
+      
+    </div>
+  </header><!-- End Header -->
+  <div class="container">
+    {% block content %}{% endblock content %}
+  </div>
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6 footer-contact">
+            <h3>Rebook</h3>
+            <p>
+            <br>
+             {% comment %} <a href="tel:+916396950564"><i class="fa fa-phone" aria-hidden="true"> </i> +916396950564</a> {% endcomment %}
+             <br> 
+             <a href="mailto:2000rebook@gmail.com"> <i class="fa fa-envelope" aria-hidden="true"></i> 2000rebook@gmail.com</a> 
+             {% comment %} <strong>Email:</strong> <br> {% endcomment %}
+            </p>
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'home' %}">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'about' %}">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'contact' %}">Contact us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'terms' %}">Terms of service</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'privacy' %}">Privacy policy</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container d-md-flex py-4">
+
+      <div class="mr-md-auto text-center text-md-left">
+        <div class="copyright">
+          &copy; Copyright <strong><span>Rebook {% now "Y"%}</span></strong>. All Rights Reserved
+        </div>
+      </div>
+      <div class="social-links text-center text-md-right pt-3 pt-md-0">
+        <a href="https://twitter.com/Rebook_2000" class="twitter"><i class="bx bxl-twitter"></i></a>
+        <a href="https://www.facebook.com/Rebook-101170785520360" class="facebook"><i class="bx bxl-facebook"></i></a>
+        <a href="https://www.instagram.com/rebook__2000/" class="instagram"><i class="bx bxl-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/company-rebook-458840213/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+  <script src="{% static 'vendor/waypoints/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'vendor/counterup/counterup.min.js' %}"></script>
+  <script src="{% static 'vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'vendor/aos/aos.js' %}"></script>
+{% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> {% endcomment %}
+  <!-- Template Main JS File -->
+  <script src="{% static 'js/main.js' %}"></script>
+ 
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,462 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="my-4">
+<div class="container">
+    <h2>Enlist Book</h2>
+<div class="row">
+<div class="col-lg-10 col-md-12 col-sm-12">
+
+<form action="" method="post" enctype="multipart/form-data" > {% csrf_token %}
+        <div class="card">
+        <div class="card-body text-center">
+        {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-danger" role="alert">
+              {{ message }}
+          </div>
+          {% endfor %}
+        {% endif %}
+          <div class="row my-1">
+                <div class="col-lg-6 col-md-6 col-sm-12 my-2">
+                    <input type="text" id="bookname" placeholder="BookName" name="bookname" class="ngo_class" required>
+                    </div>
+               
+                <div class="col-lg-6 col-md-6 col-sm-12 my-2">
+                       <input type="text" id="bookpublisher" placeholder="Bookpublisher" name="bookpublisher" class="ngo_class" required>
+                </div> 
+          </div>
+          <div class="row my-1">
+                <div class="col-lg-6 col-md-6 col-sm-12 my-2">
+                    <input type="text" id="bookauthor"   placeholder= "Author" name="bookauthor" class="ngo_class" required>
+                    </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 mt-2 mb-1">
+                        <input type="text" id="isbn"   placeholder= "ISBN Number(if given)" name="isbn" class="ngo_class" >
+            <small id="emailHelp" class="form-text text-muted"><i class="fa fa-info-circle fa-lg"></i> isbn is 13 digit no. at the back of book.</small> 
+                </div> 
+          </div>
+          <div class="row my-1">
+                <div class="col-lg-6 col-md-6 col-sm-12 my-2">
+                    <input type="number" id="offeredprice"  placeholder= "Selling price" name="offeredprice" class="ngo_class" required>
+                    <br>
+                      <input type="radio" id="negotiable" name="offered" value="negotiable">
+            <label for="negotiable" id="seeme">Negotiable</label> &nbsp;
+            <input type="radio" id="fixed" name="offered" value="fixed">
+            <label for="fixed" id="seeme4" >Fixed</label>
+                    </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 my-2">
+                  <input type="number" id="offeredprice"  placeholder= "Actual price of Book" name="actualprice" class="ngo_class" required>
+                </div> 
+          </div>
+            <div class="row my-1">
+                <div class="col-lg-6 col-md-6 col-sm-12 my-2">
+                             <label for="genre" id="seeme3">Category : </label>
+                             <br>
+              <select name="genre" id="genre" class="ngo_class">
+                                    <optgroup label="Playschool-VI">
+                                     <option value="" selected disabled hidden>Choose here</option>
+                                        <option value="Playschool">Playschool</option>
+                                        <option value="I">Class I</option>
+                                        <option value="II">Class II</option>
+                                        <option value="III">Class III</option>
+                                        <option value="IV">Class IV</option>
+                                        <option value="V">Class V</option>
+                                        <option value="VI">Class VI</option>
+                                    </optgroup>
+                                     <optgroup label=""></optgroup>
+                                    <optgroup label="Class VII-XII">
+                                        <option value="VII">Class VII</option>
+                                        <option value="VIII">Class VIII</option>
+                                        <option value="IX">Class IX</option>
+                                        <option value="X">Class X</option>
+                                        <option value="XI">Class XI</option>
+                                        <option value="XII">Class XII</option>
+                                    </optgroup>
+                                     <optgroup label=""></optgroup>
+                                 <optgroup label="Competitive Exam Books">
+                                        <option value="Navodaya">Navodaya Vidyalaya</option>                               
+                                        <option value="NTSE">NTSE</option>                               
+                                        <option value="Olympiads">Olympiads</option>
+                                        <option value="KVPY">KVPY</option>
+                                        <option value="SAT">SAT</option>
+
+                                        <option value="JEE">JEE Books & Modules</option>
+                                        <option value="NEET">NEET Books & Modules</option>
+                                        <option value="UPSE">UPSE Books/Module</option>
+                                        <option value="NDA-CDS">NDA/CDS Books/Module</option>
+                                        <option value="GRE-GATE">GRE/GATE Books</option>
+                                        <option value="GMAT">GMAT Books</option>
+                                        <option value="CAT">CAT Exam books</option>
+
+                                        <option value="SSC">SSC Books</option>
+                                        <option value="Banking">Banking</option>
+                                        <option value="Railway">Railway</option>
+                                        <option value="Teaching-Related">Teaching Related</option>
+                                        <option value="CompOther">Other Comp. Books</option>
+
+                                    </optgroup>
+
+
+
+                     
+                                     <optgroup label=""></optgroup>
+                                    <optgroup  label="Science Courses">
+                                     <optgroup label=""></optgroup>
+                                      <optgroup label="Engineering Books & models">
+                                          <optgroup label="First Year">
+                                          <option value="FAero">Aerospace/aeronautical </option>
+                                          <option value="FChemical">Chemical</option>
+                                          <option value="FCivil">Civil</option>
+                                          <option value="FCE">Computer Engineering </option>                               
+                                          <option value="FElectrical">Electrical </option>
+                                          <option value="FECE">Electronics & Communication</option>
+                                          <option value="FIT">Information & Technology</option>                               
+                                          <option value="FMech">Mechanical</option>
+                                          <option value="FOthers">Other</option>
+                                         </optgroup>
+
+
+ <optgroup label=""></optgroup>
+                                        <optgroup label="Second Year">
+                                         <option value="SAero">Aerospace/aeronautical </option>
+                                         <option value="SChemical">Chemical</option>
+                                        <option value="SCivil">Civil</option>
+                                          <option value="SCE">Computer Engineering </option>                               
+                                        <option value="SElectrical">Electrical </option>
+                                        <option value="SECE">Electronics & Communication</option>
+                                        <option value="SIT">Information & Technology</option>                               
+                                        <option value="SMech">Mechanical</option>
+                                        <option value="SOthers">Other</option>
+                                         </optgroup>
+
+ <optgroup label=""></optgroup>
+                                        <optgroup label="Third Year">
+                                         <option value="TAero">Aerospace/aeronautical </option>
+                                         <option value="TChemical">Chemical</option>
+                                        <option value="TCivil">Civil</option>
+                                        <option value="TCE">Computer Engineering </option>                               
+                                        <option value="TElectrical">Electrical </option>
+                                        <option value="TECE">Electronics & Communication</option>
+                                        <option value="TIT">Information & Technology</option>                               
+                                        <option value="TMech">Mechanical</option>
+                                        <option value="TOthers">Other</option>
+                                         </optgroup>
+
+
+ <optgroup label=""></optgroup>
+                                        <optgroup label="Fourth Year">
+                                        <option value="FoAero">Aerospace/aeronautical </option>
+                                         <option value="FoChemical">Chemical</option>
+                                        <option value="FoCivil">Civil</option>
+                                          <option value="FoCE">Computer Engineering </option>                               
+                                        <option value="FoElectrical">Electrical </option>
+                                        <option value="FoECE">Electronics & Communication</option>
+                                        <option value="FoIT">Information & Technology</option>                               
+                                        <option value="FoMech">Mechanical</option>
+                                        <option value="FoOthers">Other</option>
+                                         </optgroup>
+                                    </optgroup>
+
+{% comment %} MEDICAL BOOKS {% endcomment %}
+  
+ <optgroup label=""></optgroup>
+                                         <optgroup label="B.Sc">
+                                           <option value="bsci">B.Sc I-year</option>
+                                           <option value="bscii">B.Sc II-year</option>
+                                           <option value="bsciii">B.Sc Final-year</option>
+                                         </optgroup>
+                                          <optgroup label=""></optgroup>
+                                         <optgroup label="B.E">
+                                           <option value="BEI">B.E I-year</option>
+                                           <option value="BEII">B.E II-year</option>
+                                           <option value="BEIII">B.E III-year</option>
+                                            <option value="BEIV">B.E Final-year</option>
+                                         </optgroup>
+                                          <optgroup label=""></optgroup>
+                                          <optgroup label="B.C.A">
+                                           <option value="BCAI">B.C.A I-year</option>
+                                           <option value="BCAII">B.C.A II-year</option>
+                                           <option value="BCAIII">B.C.A Final-year</option>
+                                         </optgroup>
+                                          <optgroup label=""></optgroup>
+                                         <optgroup label="M.S.C">
+                                           <option value="MSCI">M.S.C I-year</option>
+                                           <option value="MSCII">M.S.C Final-year</option>
+                                         </optgroup>
+                                          <optgroup label=""></optgroup>
+                                           <optgroup label="M.Tech">
+                                           <option value="MTechI">M.Tech I-year</option>
+                                           <option value="MTechII">M.Tech Final-year</option>
+                                         </optgroup>
+
+ <optgroup label=""></optgroup>
+                                          <optgroup label="BAMS">
+                                           <option value="BAMSI">BAMS I-year</option>
+                                           <option value="BAMSII">BAMS II-year</option>
+                                            <option value="BAMSIII">BAMS III-year</option>
+                                           <option value="BAMSIV">BAMS IV-year</option>
+                                           <option value="BAMSV">BAMS Final-year</option>
+                                         </optgroup>
+                                          <optgroup label=""></optgroup>
+                                          <optgroup label="BHMS">
+                                         <option value="BHMSI">BHMS I-year</option>
+                                           <option value="BHMSII">BHMS II-year</option>
+                                            <option value="BHMSIII">BHMS III-year</option>
+                                           <option value="BHMSIV">BHMS IV-year</option>
+                                           <option value="BHMSV">BHMS Final-year</option>
+
+                                         </optgroup>
+                                          <optgroup label=""></optgroup>
+                                          <optgroup label="BUMS">
+                                          <option value="BUMSI">BUMS I-year</option>
+                                           <option value="BUMSII">BUMS II-year</option>
+                                            <option value="BUMSIII">BUMS III-year</option>
+                                           <option value="BUMSIV">BUMS IV-year</option>
+                                           <option value="BUMSV">BUMS Final-year</option>
+                                         </optgroup>
+ <optgroup label=""></optgroup>
+                                         <optgroup label="Medical Books & models">
+                                    
+                                         <optgroup label="Subjects">
+                                    <option value="Anatomy">Anatomy</option>
+                                     <option value="Anesthesiology">Anesthesiology</option>
+                                     <option value="Biochemistry">Biochemistry</option>
+                                     <option value="CommunityMedicine">Community Medicine</option>
+                                     <option value="Cardiology">Cardiology</option>
+                                     <option value="Dermatology">Dermatology</option>
+                                     <option value="ECG">ECG</option>
+                                     <option value="ENT">ENT</option>
+                                     <option value="ForensicMedicine">Forensic Medicine</option>
+                                     <option value="ObstetricsandGynaecology">Obstetrics and Gynaecology</option>
+                                     <option value="Orthopedics">Orthopedics</option>
+                                     <option value="Opthalmology">Opthalmology</option>
+                                     <option value="Microbiology">Microbiology</option>
+                                     <option value="Medicine">Medicine</option>
+                                     <option value="Pathology">Pathology</option>
+                                     <option value="Physiology">Physiology</option>
+                                     <option value="Pediatrics">Pediatrics</option>
+                                     <option value="Pharmacology">Pharmacology</option>
+                                     <option value="Surgery">Surgery</option>
+                                     <option value="mfothers">Others</option>
+                                         </optgroup>
+ <optgroup label=""></optgroup>
+                                    <optgroup  label="Arts Courses">
+                          <optgroup label=""></optgroup>           
+                                         <optgroup label="B.A">
+                                           <option value="BAI">B.A I-year</option>
+                                           <option value="BAII">B.A II-year</option>
+                                           <option value="BAIII">B.A Final-year</option>
+
+                                         </optgroup>
+                                          <optgroup label=""></optgroup>
+                                         <optgroup label="B.F.A">
+                                           <option value="BFAI">B.F.A I-year</option>
+                                           <option value="BFAII">B.F.A II-year</option>
+                                           <option value="BFAIII">BFA Final-year</option>
+
+                                         </optgroup>
+                                          <optgroup label=""></optgroup>
+                                          <optgroup label="B.B.A">
+                                           <option value="BBAI">B.B.A I-year</option>
+                                           <option value="BBAII">B.B.A II-year</option>
+                                           <option value="BBAIII">B.B.A Final-year</option>
+                                         </optgroup>
+                                          <optgroup label=""></optgroup>
+                                          <optgroup label="B.A + L.L.B">
+                                           <option value="BLLBI">B.A + L.L.B I-year</option>
+                                           <option value="BLLBII">B.A + L.L.B II-year</option>
+                                           <option value="BLLBIII">B.A + L.L.B III-year</option>
+                                           <option value="BLLBIV">B.A + L.L.B IV-year</option>
+                                           <option value="BLLBV">B.A + L.L.B Final-year</option>
+                                         </optgroup>
+                                          <optgroup label=""></optgroup>
+                                          <optgroup label="B.J.M">
+                                           <option value="BJMI">B.J.M I-year</option>
+                                           <option value="BJMII">B.J.M II-year</option>
+                                           <option value="BJMIII">B.J.M Final-year</option>
+                                         </optgroup>
+                                          <optgroup label=""></optgroup>
+                                         <optgroup label="B.H.M">
+                                           <option value="BHMI">B.H.M I-year</option>
+                                           <option value="BHMII">B.H.M II-year</option>
+                                           <option value="BHMIII">B.H.M III-year</option>
+                                            <option value="BHMIV">B.H.M Final-year</option>
+                                    </optgroup>
+
+{% comment %} Commerce Courses {% endcomment %}
+ <optgroup label=""></optgroup>
+                                <optgroup  label="Commerce Courses">
+                                 <optgroup label=""></optgroup>
+                                         <optgroup label="B.Com">
+                                           <option value="BComI">B.Com I-year</option>
+                                           <option value="BComII">B.Com II-year</option>
+                                           <option value="BComIII">B.Com Final-year</option>
+                                         </optgroup>
+                                          <optgroup label=""></optgroup>
+                                         <optgroup label="B.L.Ed">
+                                           <option value="BLDI">B.L.Ed I-year</option>
+                                           <option value="BLDII">B.L.Ed II-year</option>
+                                           <option value="BLDIII">B.L.Ed  III-year</option>
+                                            <option value="BLDIV">B.L.Ed Final-year</option>
+                                         </optgroup>
+                                          <optgroup label=""></optgroup>
+                                         <optgroup label="B.Ed">
+                                           <option value="bedi">B.Ed I-year</option>
+                                           <option value="bedii">B.Ed II-year</option>      
+                                         </optgroup>
+                                            <optgroup label=""></optgroup>
+                                         <optgroup label="B.tc">
+                                           <option value="btci">B.tc I-year</option>
+                                           <option value="btcii">B.tc II-year</option>      
+                                         </optgroup>
+                                          <optgroup label=""></optgroup>
+                                          <optgroup label="L.L.B">
+                                           <option value="LLBI">L.L.B I-year</option>
+                                           <option value="LLBII">L.L.B II-year</option>
+                                           <option value="LLBIII">L.L.B Final-year</option>
+                                         </optgroup>
+                                          <optgroup label=""></optgroup>
+                                          <optgroup label="CA">
+                                           <option value="CAI">CA I-year</option>
+                                           <option value="CAII">CA II-year</option>
+                                           <option value="CAIII">CA III-year</option>
+                                           <option value="CAIV">CA IV-year</option>
+                                           <option value="CAV">CA Final-year</option>
+                                         </optgroup>
+                                          <optgroup label=""></optgroup>
+                                          <optgroup label="CS">
+                                           <option value="CSI">CS I-year</option>
+                                         </optgroup>
+                                          <optgroup label=""></optgroup>
+                                         <optgroup label="CMA">
+                                           <option value="CMAI">C.M.A I-year</option>
+                                           <option value="CMAII">C.M.A II-year</option>
+                                           <option value="CMAIII">C.M.A III-year</option>
+                                            <option value="CMAIV">C.M.A Final-year</option>
+                                         </optgroup>
+                                            
+ <optgroup label=""></optgroup>
+                                        <optgroup label="CFP">
+                                           <option value="CFPI">C.F.P I-year</option>
+                                         </optgroup>
+                                          <optgroup label=""></optgroup>
+                                         <optgroup label="M.Com">
+                                           <option value="MComI">M.Com I-year</option>
+                                           <option value="MComII">M.Com Final-year</option>
+                                         </optgroup>
+                                          <optgroup label=""></optgroup>
+                                         <optgroup label="M.B.A">
+                                           <option value="MBAI">M.B.A I-year</option>
+                                           <option value="MBAII">M.B.A Final-year</option>
+                                         </optgroup>
+                                    </optgroup>
+                                     <optgroup label=""></optgroup>
+                                    <optgroup label="Language">
+                                    <option value="Sanskrit">Sanskrit</option>
+                                    <option value="Hindi">Hindi</option>
+                                    <option value="English">English</option>
+                                    <option value="French">French</option>
+                                    <option value="LangOthers">Others</option>  
+                                    </optgroup>
+                                    <optgroup label=""></optgroup>
+                                    <optgroup label="Fiction & Non-Fiction">
+                                    <option value="Astrology">Astrology</option>
+                                    <option value="Business">Business</option>
+                                    <option value="Health">Health</option>
+                                    <option value="HistoryPolitics">History-Poltics</option>
+                                    <option value="SportsGames">Sports-Games</option>
+                                    <option value="FictionalOther"> Others</option>  
+                                    </optgroup>
+                                    <optgroup label=""></optgroup>
+                                    <optgroup label="Entertainment">
+                                    <option value="Magazine">Magazine</option>
+                                    <option value="ComicBooks">Comic Books</option>
+                                    <option value="StoryBook">Story Book</option>
+                                    <option value="PoemBook">Poem Book</option>
+                                    <option value="OtherEntertainment">Others</option>  
+                                    </optgroup>
+                                    <optgroup label=""></optgroup>
+                                    <optgroup label="Self Help & Spirituality">
+                                    <option value="self_help">Self Help</option>
+                                    <option value="Spirituality">Spirituality</option>
+                                    <option value="shspo">Others</option>  
+                                    </optgroup>
+                                     <optgroup label=""></optgroup>
+                                     <optgroup label="Finance and Economy">
+                                    <option value="Finance">Finance</option>
+                                    <option value="Economy">Economy</option>
+                                    <option value="feo">Others</option>  
+                                    </optgroup>
+                                    <option value="Other">Others</option>
+                                    </optgroup>
+                                </select>
+                    </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 my-2">
+                           <label for="board" id="seeme2">Board(if any) : </label>
+                           <br>
+                            <select name="board" id="board" class="ngo_class">
+                             <option value="" selected disabled hidden>Choose here</option>
+                                    <option value="CBSE">CBSE </option>
+                                    <option value="ICSE">ICSE</option>
+                                    <option value="Up-board">Up-board</option>
+                                    <option value="Delhi-board">Delhi-board</option>
+                                    <option value="Other-board">Other board</option>
+                             </select>
+                </div> 
+          </div>
+        
+          <div class="row my-3">
+                 <div class="col-lg-6 col-md-6 col-sm-12 my-2" style="display:block;margin:auto;">
+                 <label for="book_photo" id="seeme5">Book images : </label>
+                                <input type="file" id="book_photo" name="book_photo" class="text-center ml-4" multiple required>
+                </div>
+            </div>
+
+            <h2 class="text-center my-5">Seller Details</h2>
+            <div class="row my-1">
+                <div class="col-lg-6 col-md-6 col-sm-12 my-2">
+                 <input type="text" placeholder="Seller Name" id="reseller_name" name="reseller_name" class="ngo_class" required>
+                </div>
+                 <div class="col-lg-6 col-md-6 col-sm-12 my-2">
+                 <input type="text" placeholder="Contact No." id="reseller_contact" name="reseller_contact" class="ngo_class" required>
+                </div>
+            </div>
+            <div class="row my-1">
+                <div class="col-lg-6 col-md-6 col-sm-12 my-2">
+                 <input type="text" placeholder="WhatsappNo." id="reseller_whatsapp" name="reseller_whatsapp" class="ngo_class" required>
+                </div>
+                 <div class="col-lg-6 col-md-6 col-sm-12 my-2">
+                 <input type="text" placeholder="Address" id="reseller_address" name="reseller_address" class="ngo_class" required>
+                </div>
+            </div>
+
+            <div class="row my-1">
+                <div class="col-lg-6 col-md-6 col-sm-12 my-2">
+                <input type="text" placeholder="City" id="reseller_city" name="reseller_city" class="ngo_class" required>
+                </div>
+                 <div class="col-lg-6 col-md-6 col-sm-12 my-2">
+                 <input type="text" placeholder="Pincode" id="reseller_pincode" name="reseller_pincode" class="ngo_class" required>
+                </div>
+            </div>       
+             <div class="row my-1">
+                <div class="col-lg-6 col-md-6 col-sm-12 my-2">
+                   <input type="text" placeholder="State" id="reseller_state" name="reseller_state" class="ngo_class" required>
+                </div>
+               
+            </div>         
+                               
+                                <br><br>
+                                <input type="submit" value="Submit Detail" class="btn btn-primary">
+                            </form>
+        </div>
+        </div>
+    </form>
+
+</div>
+<div class="col-lg-2 col-md-12 col-sm-12"></div>
+
+</div>
+</div>
+</section>
+
+{% endblock content %}

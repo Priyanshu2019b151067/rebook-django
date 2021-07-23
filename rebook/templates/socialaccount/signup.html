@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block content %}
+
+<section class="my-5">
+
+<h1 class="my-3">Sign Up</h1>
+{% comment %} {% blocktrans with provider_name=account.get_provider.name site_name=site.name %} {% endcomment %}
+<p>You are about to use your {{provider_name}} account to login to
+{{site_name}}. As a final step, please complete the following form</p>
+
+<form class="signup" id="signup_form" method="post" action="{% url 'socialaccount_signup' %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <button type="submit">Sign Up</button>
+</form>
+</section>
+
+
+{% endblock %}

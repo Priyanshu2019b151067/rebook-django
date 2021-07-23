@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="my-4">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <h2>Register </h2>
+            <div class="card">
+            <div class="card-body">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-danger" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+                <form action="" method="post" class="text-center"> {% csrf_token %}
+                        <div class="form-group">
+                            <input type="text" name="username" id="username" placeholder="Username" required>
+                            
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" id="email" placeholder="Email" required>
+                            {% comment %} <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> {% endcomment %}
+                        </div>
+                        <div class="form-group ">
+                            <input class="ml-3"type="password" name="password1" id="password1" placeholder="Password" required>
+                            <i class="fa fa-eye-slash" id="togglePassword1" style="cursor: pointer;"></i> 
+                            <br>
+                            <small id="emailHelp" class="form-text text-muted"><i class="fa fa-info-circle fa-lg"></i> should be 8 character long.</small> 
+                        </div>
+                        <div class="form-group">
+                        <input class="ml-3" type="password" name="password2" id="password2" placeholder="Confirm Password" required>
+                        <i class="fa fa-eye-slash" id="togglePassword2" style="cursor: pointer;"></i>
+                        </div>
+                         <input type="submit" value="Register" class="btn btn-danger" >
+                   
+                    <br><br>
+                    <p class="text-right"><a href="{% url 'account_login' %}">Already registered   </a></p>
+                </form>
+            </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            
+        </div>
+    </div>
+</div>
+</section>
+
+{% endblock content %}

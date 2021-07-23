@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+<section class="my-5">
+<div class="row my-3">
+<div class="col-lg-6 col-md-6 col-sm-12 my-3 user_profile text-center"> 
+<div class="">
+<img src="{% static 'img/man.png' %}" style="width: 220px;"alt="userprofile" class=""> 
+        <h2 class="" style="line-height:1.2">{{request.user}} </h2>
+        <h5 class="mx-2" style="line-height:1">User Since : {{ created_at | timesince }}</h5>
+</div>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-12  user_profile my-3">
+<div class="card text-left" style="width: 97%;; box-shadow:10px 10px #cfd7ef">
+   <h4 class="mx-1" style="line-height:2">Contact info <i class="fa fa-info-circle" aria-hidden="true"></i></h4>
+    <p class="mx-2" style="font-weight: 600;" ><i class="fas fa-envelope-open fa-sm"></i> {{request.user.email}}</p>
+     <h4 class="mx-1" style="line-height:2">Post info <i class="fa fa-edit " aria-hidden="true"></i></h4>
+    <h6 class="mx-2" style="line-height:1.2;font-weight: 700;">Resell Posts :  {{sell_post}}</h6>
+    <h6 class="mx-2" style="line-height:1.2;font-weight: 700;">Donation Posts : {{don_post}}</h6>
+</div>
+ 
+    {% comment %} <p class="text-center"></p> {% endcomment %}
+</div>
+</div>
+
+{% if books %}
+<div class="section-title my-4">
+          <h2>Listed Books </h2>
+          <p>For Resell </p>
+        </div>
+<div class="row">
+  {% comment %} {% for book in books.all  %} {% endcomment %}
+      {% for book in books %}
+ <div class="col-lg-4 col-md-6  d-flex justify-content-center">
+      <div class="card mr-2 ml-2 my-3 bg-light page_pr" >
+                <h2 class="mb-0">
+                   <span 
+                    class="badge badge-info badge-sm text-white">&#8377;{{book.offeredprice}} ({{book.offered |lower}})</span>
+                    <kbd class="badge badge-secondary badge-sm" style="font-size: 15px;"><del>&#8377;{{book.actualprice}}</del></kbd>
+                </h2> 
+            <div class="card-body">
+            <h5 class="card-title" style="font-weight:bold;overflow-wrap: anywhere; font-size:19px;color: white;background: black;padding: 0.25rem 0.5rem;border-radius: 4px;">{{book.book_name | title}}</h5>
+             
+            <p class="" style="font-weight:1000;overflow-wrap: anywhere;"><i class="fas fa-pencil-alt"></i> {{book.author | title}}</p>
+                  <p class="" style="font-weight:1000;overflow-wrap: anywhere;"> Pub : {{book.publisher | title}}</p>
+                  <p class="" style="font-weight:1000;overflow-wrap: anywhere;"><i class="fa fa-map-marker fa-lg"></i> {{book.resellercity | title}}</p>
+                <a href="{% url 'resell_details' book.reseller_name book.bookname %}?q=profile" class="btn btn-primary">Full Details</a>
+                {% ifequal request.user book.acc_holder %}
+                <a href="{% url 'delete_page1' book.reseller_name book.bookname %}" class="btn btn-danger  delete_ad">Delete</a>
+                {% endifequal %}
+                 <br>
+                 <span class="badge badge-secondary" style="font-size:12px">Posted {{book.pub_date | timesince }} ago</span>
+            </div> 
+             <div class="card-footer text-muted " >
+                <a href="https://wa.me/+91{{book.reseller_whatsapp}}" 
+                class="whatsapp_style"  target="_blank">
+                                <i class="fa fa-whatsapp fa-2x"></i>
+                </a>
+             
+                <a class="phone_style"  href="tel:+91 {{book.reseller_contact}}">
+                <i class="fa fa-phone fa-2x" style="cursor: pointer;"></i>
+                </a>
+                
+            </div>
+       </div> 
+      </div>
+{% endfor %}
+</div>
+{% endif %}
+{% if indi %}
+<div class="section-title my-5">
+        <h2>Listed Books </h2>
+          <p>For Donation </p>
+        </div>
+<div class="row">
+{% for book in indi.all %}
+ <div class="col-lg-4 col-md-6  d-flex justify-content-center">
+        <div class="card mr-2 ml-2 my-3 bg-light page_pr" >
+                        <h3 class="mb-0">
+                    <span  class="badge badge-info text-white ">Free<span> 
+                    </h3> 
+            <div class="card-body">
+                <h5 class="card-title" style="font-weight:bold;overflow-wrap: anywhere; font-size:19px;color: white;background: black;padding: 0.25rem 0.5rem;border-radius: 4px;">{{book.bookname | title}}</h5>
+                  <p class="" style="font-weight:1000;overflow-wrap: anywhere;"><i class="fas fa-pencil-alt"></i> {{book.author | title}}</p>
+                  <p class="" style="font-weight:1000;overflow-wrap: anywhere;"> Pub : {{book.publisher_detail | title}}</p>
+                  <p class="" style="font-weight:1000;overflow-wrap: anywhere;"><i class="fa fa-map-marker fa-lg"></i> {{book.donar_city | title}}</p>
+                <a href="{% url 'donate_details' book.donarname book.bookname %}?q=profile" class="btn btn-primary">Full Details</a>
+                {% ifequal request.user book.acc_holder %}
+                <a href="{% url 'delete_page' book.donarname book.bookname %}" class="btn btn-danger  delete_ad">Delete</a>
+                {% endifequal %}
+                 <br>
+                 <span class="badge badge-secondary" style="font-size:12px">Posted {{book.pub_date | timesince }} ago</span>
+            </div> 
+             <div class="card-footer text-muted " >
+                <a href="https://wa.me/+91{{book.donarwhatsapp}}" 
+                class="whatsapp_style"  target="_blank">
+                                <i class="fa fa-whatsapp fa-2x"></i>
+                </a>
+             
+                <a class="phone_style"  href="tel:+91 {{book.donarphone}}">
+                <i class="fa fa-phone fa-2x" style="cursor: pointer;"></i>
+                </a>
+                
+            </div>
+       </div> 
+       </div> 
+{% endfor %}
+</div>
+{% endif %}
+</section>
+{% endblock content %}

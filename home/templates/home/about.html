@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title my-5">
+          <h2>About</h2>
+          <p>About Us</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
+            <img src="{% static 'img/about.svg' %}" class="img-fluid" alt="">
+          </div>
+           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
+           <h5 class="font-italic">
+            Welcome to Rebook,the platform to buy and enlist second-hand books for resell. Buying and selling second-hand books become very simple with us.
+            You simply enlist your book for resell,interested buyer will contact you based on the information you provide on your enlisting form.
+            Buy Book section consists all the books available for resell. Buyers get all the information about the book and seller.
+            <br>
+            We have further extends our scope to <a href="{% url 'donate' %}">donate</a> the books to listed NGO's and also for individual donating. 
+             We're dedicated to providing you best experience.
+             In case of any query and complaints you can <a href="{% url 'contact' %}">Contact</a> us.
+             <br>
+        We will be happy to help you .
+        <br>
+        Sincerely,
+        <br><br>
+            </h5>
+        <p style="font-size:20px;"><strong> Priyanshu</strong></p>
+        <p>(Founder Developer)</p>
+          </div> 
+        </div>
+
+      </div>
+    </section>
+
+{% endblock content %}

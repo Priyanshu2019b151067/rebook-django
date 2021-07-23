@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="my-4">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <h2>Login</h2>
+            <div class="card">
+            <div class="card-body">
+            {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    {% comment %} Account activation link has been sent to your registered email. {% endcomment %}
+    {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+    {% endfor %}
+    {% endif %}
+                 <form action="" method="post" class="text-center"> {% csrf_token %}
+                    <input type="text" name="username" id="username" placeholder="Username or Email" required>
+                    <br><br>
+                    <input style="margin-left:1.25rem;" type="password" name="password" id="password1" placeholder="Password" required>
+                    <i class="fa fa-eye-slash " id="togglePassword1" style=" 
+                     cursor: pointer;"></i> 
+                     <br><br>
+                         <input type="submit" value="Login" class="btn btn-primary text-left" >
+                    <br><br>
+                    <p class="">Don't have account ?<a href="{% url 'register' %}"> Create</a></p>
+                    <p class="">Forget Password?<a href="{% url 'password_reset' %}">Reset Password</a></p>
+                </form>
+            </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <img src="{% static 'img/login.png' %}" alt="LoginPage" class="login_img">
+        </div>
+    </div>
+</div>
+</section>
+
+{% endblock content %}

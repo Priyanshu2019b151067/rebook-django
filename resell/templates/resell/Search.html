@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="my-5">
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-primary" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+{% else %}
+<div class="row">
+<div class="col-lg-4"><h5 class="text-left">Results:</h5></div>
+<div class="col-lg-4"></div>
+<div class="col-lg-4">
+<form action="{% url 'location'%}?q={{q}}&g={{g}}&bs={{bs}}" id="loc_search" method="post" class="my-3"> {% csrf_token %}
+            <input type="text" placeholder="Enter City" id="locc" name="search" style="width:70%;" value="" required>
+            <input type="hidden" name="next" value="{{ request.path }}">
+            <button class="btn btn-primary" name="location_search" style="font: caption;" type="submit"><i class="fa fa-search"></i></button>
+        </form>
+
+</div>
+</div>
+{% endif %}
+
+ 
+<div class="row ">
+{% for book in books %}
+ <div class="col-lg-4 col-md-2  d-flex justify-content-center">
+      <div class="card mr-2 ml-2 my-3 bg-light page_pr" >
+                <h2 class="mb-0">
+                   <span 
+                    class="badge badge-info badge-sm text-white">&#8377;{{book.offeredprice}} ({{book.offered |lower}})</span>
+                    <kbd class="badge badge-secondary badge-sm" style="font-size: 15px;"><del>&#8377;{{book.actualprice}}</del></kbd>
+                </h2> 
+            <div class="card-body">
+            <h5 class="card-title" style="font-weight:bold;overflow-wrap: anywhere; font-size:19px;color: white;background: black;padding: 0.25rem 0.5rem;border-radius: 4px;">{{book.book_name | title}}</h5>
+             
+            <p class="" style="font-weight:1000;overflow-wrap: anywhere;"><i class="fas fa-pencil-alt"></i> {{book.author | title}}</p>
+                  <p class="" style="font-weight:1000;overflow-wrap: anywhere;"> Pub : {{book.publisher | title}}</p>
+                  <p class="" style="font-weight:1000;overflow-wrap: anywhere;"><i class="fa fa-map-marker fa-lg"></i> {{book.resellercity | title}}</p>
+                <a href="{% url 'resell_details' book.reseller_name book.bookname %}" class="btn btn-primary">Full Details</a>
+                {% ifequal request.user book.acc_holder %}
+                <a href="{% url 'delete_page1' book.reseller_name book.bookname %}" class="btn btn-danger  delete_ad">Delete</a>
+                {% endifequal %}
+                 <br>
+                 <span class="badge badge-secondary" style="font-size:12px">Posted {{book.pub_date | timesince }} ago</span>
+            </div> 
+             <div class="card-footer text-muted " >
+                <a href="https://wa.me/+91{{book.reseller_whatsapp}}" 
+                class="whatsapp_style"  target="_blank">
+                                <i class="fa fa-whatsapp fa-2x"></i>
+                </a>
+             
+                <a class="phone_style"  href="tel:+91 {{book.reseller_contact}}">
+                <i class="fa fa-phone fa-2x" style="cursor: pointer;"></i>
+                </a>
+                
+            </div>
+       </div> 
+      </div>
+{% endfor %}
+</div>
+<div class="text-center">
+<a href="{% url 'category' %}?q={{q}}&g={{g}}" id="stepper" class="previous round"><<</a>
+</div>
+</section>
+{% endblock content %}
